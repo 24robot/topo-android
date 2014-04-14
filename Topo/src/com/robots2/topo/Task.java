@@ -1,5 +1,7 @@
 package com.robots2.topo;
 
+import java.util.List;
+
 public class Task {
 
 	private String mText;
@@ -7,6 +9,10 @@ public class Task {
 	private String mId;
 	
 	private boolean mComplete;
+	
+	private List<String> mParentIds;
+	
+	private String mColor;
 	
 	public Task() {
 		
@@ -48,6 +54,25 @@ public class Task {
 	
 	public void setComplete(boolean complete) {
 		mComplete = complete;
+	}
+	
+	public void addParent(String parentId) {
+		mParentIds.add(parentId);
+	}
+	
+	public void removeParent(String parentId) {
+		boolean removedSuccessfully = false;
+		for (String parent : mParentIds) {
+			if (parentId.equals(parent)) {
+				mParentIds.remove(parent);
+				removedSuccessfully = true;
+				break;
+			}
+		}
+		
+		if (!removedSuccessfully) {
+			// Throw suitable error here
+		}
 	}
 	
 	@Override
