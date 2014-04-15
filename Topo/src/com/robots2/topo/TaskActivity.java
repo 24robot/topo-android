@@ -1,21 +1,19 @@
 package com.robots2.topo;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Intent;
+import java.util.List;
+
+import android.app.ListActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 
-public class TaskActivity extends Activity {
+public class TaskActivity extends ListActivity {
 
-	private TaskAdapter mAdapter;
-	
-	private EditText mTextNewTask;
+	private TaskDataSource dataSource;
 	
 	private ProgressBar mProgressBar;
 	
@@ -27,32 +25,43 @@ public class TaskActivity extends Activity {
 		mProgressBar = (ProgressBar) findViewById(R.id.loadingProgressBar);
 		mProgressBar.setVisibility(ProgressBar.GONE);
 		
-		try {
-			mTextNewTask = (EditText) findViewById(R.id.textNewTask);
+		dataSource = new TaskDataSource(this);
+		dataSource.open();
+		
+		List<Task> tasks = dataSource.getAllTasks();
+		ArrayAdapter<Task> adapter = new ArrayAdapter<Task>(this, R.layout.row_list_task, R.id.checkTaskItem, tasks);
+		setListAdapter(adapter);
+		
+	}
+	
+	public void onClick(View view) {
+		@SuppressWarnings("unchecked")
+		ArrayAdapter<Task> adapter = (ArrayAdapter<Task>) getListAdapter();
+		Task task = null;
+		
+		switch(view.getId()) {
+			case R.id.buttonAddTask:
+				EditText e = (EditText) findViewById(R.id.textNewTask);
+				String description = e.getText().toString();
+				
+				if (description != null) {
+					task = dataSource.addTask(description);
+					adapter.add(task);
+				}
+				
+				break;
 			
-			mAdapter = new TaskAdapter(this, R.layout.row_list_task);
-			ListView listViewTask = (ListView) findViewById(R.id.listViewTask);
-			listViewTask.setAdapter(mAdapter);
-		} catch (Exception e) {
-			createAndShowDialog(e, "Error");
+			case R.id.checkTaskItem:
+				if (getListAdapter().getCount() > 0) {
+					task = (Task) getListAdapter().getItem(0);
+			        dataSource.deleteTask(task);;
+			        adapter.remove(task);
+				}
+				
+				break;
 		}
 		
-	}
-
-	private void createAndShowDialog(Exception exception, String title) {
-		Throwable ex = exception;
-		if(exception.getCause() != null){
-			ex = exception.getCause();
-		}
-		createAndShowDialog(ex.getMessage(), title);
-	}
-
-	private void createAndShowDialog(String message, String title) {
-		AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
-		
-		alertBuilder.setMessage(message);
-		alertBuilder.setTitle(title);
-		alertBuilder.create().show();
+		adapter.notifyDataSetChanged();
 	}
 
 	@Override
@@ -64,29 +73,21 @@ public class TaskActivity extends Activity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
-		switch(id)
-		{
-			case (R.id.action_add_task):
-				Intent addNewTaskIntent = new Intent(this, NewTaskActivity.class);
-				startActivity(addNewTaskIntent);
-				break;
-			case (R.id.action_settings):
-				break;
-			default:
-				break;
+		if (id == R.id.action_settings) {
+			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
-	public void checkTask(Task task) {
-		task.setComplete(true);
-		mAdapter.remove(task);
+	
+	@Override
+	protected void onResume() {
+		dataSource.open();
+		super.onResume();
 	}
 	
-	public void addItem(View v) {
-		Task task = new Task(mTextNewTask.getText().toString(), false);
-		mAdapter.add(task);
-		
-		mTextNewTask.setText("");
+	@Override
+	protected void onPause() {
+		dataSource.close();
+		super.onPause();
 	}
 }
