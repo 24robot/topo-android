@@ -2,13 +2,11 @@ package com.robots2.topo;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -27,7 +25,6 @@ public class TaskActivity extends Activity {
 		setContentView(R.layout.activity_task);
 
 		mProgressBar = (ProgressBar) findViewById(R.id.loadingProgressBar);
-		
 		mProgressBar.setVisibility(ProgressBar.GONE);
 		
 		try {
@@ -67,8 +64,16 @@ public class TaskActivity extends Activity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
+		switch(id)
+		{
+			case (R.id.action_add_task):
+				Intent addNewTaskIntent = new Intent(this, NewTaskActivity.class);
+				startActivity(addNewTaskIntent);
+				break;
+			case (R.id.action_settings):
+				break;
+			default:
+				break;
 		}
 		return super.onOptionsItemSelected(item);
 	}
