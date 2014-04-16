@@ -4,12 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    >
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp">
 
      <LinearLayout
         android:layout_width="match_parent" 
-        android:layout_height="wrap_content"
-        android:padding="6dip"  >
+        android:layout_height="wrap_content">
 
         <EditText
             android:id="@+id/textNewTask"
@@ -30,19 +30,101 @@
             android:text="@string/add_button_text" />
 
     </LinearLayout>
-
+	
+     <Spinner 
+         android:id="@+id/colorSpinner"
+         android:layout_width="match_parent"
+         android:layout_height="48dp"
+         />
+     
+     <TextView
+            android:id="@+id/primaryTasksTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/primary_tasks"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+     
+     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+       
+        <LinearLayout 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:baselineAligned="false">
+            
+            <LinearLayout 
+                android:id="@+id/redPrimaryLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                
+                <ImageView 
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="#FF0000"
+                    android:contentDescription="@string/description" />         
+                    
+                <TextView 
+                    android:layout_width="0dp"
+                    android:layout_height="24dp"
+                    android:layout_weight="1"
+                    android:hint="@string/red_primary_task"/>
+            </LinearLayout>
+            
+             <LinearLayout 
+                android:id="@+id/greenPrimaryLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                
+                <ImageView 
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="#00FF00"
+                    android:contentDescription="@string/description" />         
+                    
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="24dp"
+                    android:layout_weight="1"
+                    android:hint="@string/green_primary_task"/>
+            </LinearLayout>
+            
+             <LinearLayout 
+               android:id="@+id/bluePrimaryLayout"
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_weight="1">
+               
+               <ImageView 
+                   android:layout_width="24dp"
+                   android:layout_height="24dp"
+                   android:background="#0000FF"
+                   android:contentDescription="@string/description" />     
+                   
+               <TextView 
+                   android:layout_width="0dp"
+                   android:layout_height="24dp"
+                   android:layout_weight="1"
+                   android:hint="@string/blue_primary_task"/>
+           	</LinearLayout>
+         </LinearLayout>
+    </LinearLayout>
+    
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="6dip" >
 
         <TextView
-            android:id="@+id/textViewTitle"
+            android:id="@+id/tasksTitle"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_marginLeft="2dp"
             android:layout_weight="0.12"
-            android:text="@string/tasks"
+            android:text="@string/secondary_tasks"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <ProgressBar

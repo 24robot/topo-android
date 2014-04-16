@@ -4,10 +4,18 @@
     android:layout_height="match_parent"
     android:orientation="horizontal">
     
-    <CheckBox
-        android:id="@+id/checkTaskItem"
+	<ImageView 
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:background="#FFFFFF"
+        android:id="@+id/task_color"
+        android:contentDescription="@string/description" />       
+    
+    <TextView
+        android:id="@+id/task_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="onClick"
         android:text="@string/checkbox_text" />
 
 </LinearLayout>

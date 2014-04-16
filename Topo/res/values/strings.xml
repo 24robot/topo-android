@@ -9,7 +9,15 @@
     <string name="menu_refresh">Refresh</string>
     <string name="checkbox_text">Task</string>
     <string name="tasks">Tasks</string>
+    <string name="primary_tasks">Primary Tasks</string>
+    <string name="secondary_tasks">Secondary Tasks</string>
     <string name="add_task">Add Task</string>
     <string name="title_activity_new_task">NewTaskActivity</string>
+    
+    <string name="red_primary_task">Red Primary Task</string>
+    <string name="green_primary_task">Green Primary Task</string>
+    <string name="blue_primary_task">Blue Primary Task</string>
+    
+    <string name="description">Description</string>
 
 </resources>
