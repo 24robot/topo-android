@@ -51,8 +51,9 @@ public class TaskActivity extends ListActivity {
 		}
 		
 		if (!colors.isEmpty()) {
-			ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, colors);
+			ArrayAdapter adapter = new ArrayAdapter(this, R.layout.spinner_item, colors);
 			mColorSpinner.setAdapter(adapter);
+			
 		}
 		
 		dataSource = new TaskDataSource(this);

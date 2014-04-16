@@ -9,7 +9,8 @@
 
      <LinearLayout
         android:layout_width="match_parent" 
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp">
 
         <EditText
             android:id="@+id/textNewTask"
@@ -34,7 +35,7 @@
      <Spinner 
          android:id="@+id/colorSpinner"
          android:layout_width="match_parent"
-         android:layout_height="48dp"
+         android:layout_height="wrap_content"
          />
      
      <TextView
@@ -42,17 +43,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/primary_tasks"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="8dp"
             android:textAppearance="?android:attr/textAppearanceLarge" />
      
      <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="8dp">
        
         <LinearLayout 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:baselineAligned="false">
+            android:baselineAligned="false"
+            android:layout_marginLeft="8dp">
             
             <LinearLayout 
                 android:id="@+id/redPrimaryLayout"
@@ -63,13 +69,15 @@
                 <ImageView 
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:background="#FF0000"
+                    android:background="@color/android_light_red"
                     android:contentDescription="@string/description" />         
                     
                 <TextView 
                     android:layout_width="0dp"
                     android:layout_height="24dp"
                     android:layout_weight="1"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_marginLeft="8dp"
                     android:hint="@string/red_primary_task"/>
             </LinearLayout>
             
@@ -82,13 +90,15 @@
                 <ImageView 
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:background="#00FF00"
+                    android:background="@color/android_light_green"
                     android:contentDescription="@string/description" />         
                     
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="24dp"
                     android:layout_weight="1"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_marginLeft="8dp"
                     android:hint="@string/green_primary_task"/>
             </LinearLayout>
             
@@ -101,13 +111,15 @@
                <ImageView 
                    android:layout_width="24dp"
                    android:layout_height="24dp"
-                   android:background="#0000FF"
+                   android:background="@color/android_light_blue"
                    android:contentDescription="@string/description" />     
                    
                <TextView 
                    android:layout_width="0dp"
                    android:layout_height="24dp"
                    android:layout_weight="1"
+                   android:layout_marginLeft="8dp"
+                   android:textAppearance="?android:attr/textAppearanceMedium"
                    android:hint="@string/blue_primary_task"/>
            	</LinearLayout>
          </LinearLayout>
@@ -116,15 +128,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="6dip" >
+        android:layout_marginTop="16dp"
+        >
 
         <TextView
-            android:id="@+id/tasksTitle"
-            android:layout_width="0dip"
+            android:id="@+id/secondaryTasksTitle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="2dp"
-            android:layout_weight="0.12"
+            android:layout_marginLeft="8dp"
             android:text="@string/secondary_tasks"
+            android:layout_marginTop="10dp"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <ProgressBar
@@ -139,8 +152,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:listitem="@layout/row_list_to_do" 
-        android:padding="6dip" >
+        android:layout_marginTop="8dp" 
+        android:layout_marginLeft="8dp"/>
 
-    </ListView>
 
 </LinearLayout>
