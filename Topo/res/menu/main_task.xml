@@ -8,6 +8,11 @@
         android:title="@string/add_task"
         android:icon="@drawable/ic_action_new"/>
         
+      <item
+          android:id="@+id/action_completed_tasks"
+          android:showAsAction="always|withText"
+          android:title="@string/completed_tasks"/>
+      
     <item
         android:id="@+id/action_settings"
         android:showAsAction="never"

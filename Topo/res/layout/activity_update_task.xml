@@ -13,11 +13,12 @@
         android:layout_marginTop="10dp"
         android:hint="@string/task_description_placeholder"/>
     
+    
     <TextView
-            android:id="@+id/addParentTasksTitle"
+            android:id="@+id/updateParentTasksTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/add_parents_text"
+            android:text="@string/update_parents_text"
             android:layout_marginTop="16dp"
             android:layout_marginLeft="8dp"
             android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -42,7 +43,7 @@
 	         <Button 
 	             android:layout_width="wrap_content"
 	             android:layout_height="wrap_content"
-	             android:text="@string/add_task"/>
+	             android:text="@string/save_task"/>
          </LinearLayout>
          
          <LinearLayout 
@@ -52,7 +53,7 @@
 	         <Button 
 	             android:layout_width="wrap_content"
 	             android:layout_height="wrap_content"
-	             android:text="@string/cancel"/>
+	             android:text="@string/delete_task"/>
          </LinearLayout>
          
          
