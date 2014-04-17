@@ -1,7 +1,10 @@
-package com.robots2.topo;
+package com.robots2.topo.contentprovider;
 
 import java.util.Arrays;
 import java.util.HashSet;
+
+import com.robots2.topo.TaskDatabaseHelper;
+import com.robots2.topo.TaskTable;
 
 import android.content.ContentProvider;
 import android.content.ContentResolver;

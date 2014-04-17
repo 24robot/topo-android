@@ -51,8 +51,9 @@
                 android:value="com.robots2.topo.MainTaskActivity" />
         </activity>
         <provider 
-            android:name=".contentprovider.TaskContentProvder"
-            android:authorities="com.robots2.topo.contentprovider">
+            android:name=".contentprovider.TaskContentProvider"
+            android:authorities="com.robots2.topo.contentprovider"
+            android:exported="false">
         </provider>
     </application>
 

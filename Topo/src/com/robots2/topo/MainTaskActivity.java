@@ -1,34 +1,36 @@
 package com.robots2.topo;
 
-import java.util.List;
+import com.robots2.topo.contentprovider.TaskContentProvider;
 
 import android.app.ListActivity;
+import android.app.LoaderManager;
+import android.content.CursorLoader;
 import android.content.Intent;
+import android.content.Loader;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 
-public class MainTaskActivity extends ListActivity implements OnItemClickListener{
+public class MainTaskActivity extends ListActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
-	private TaskContentProvider dataSource;
+	private static final int ACTIVITY_ADD = 0;
+	private static final int ACTITIVITY_UPDATE = 1;
+	private static final int DELETE_ID = Menu.FIRST + 1;
+	
+	private SimpleCursorAdapter adapter;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_task_main);
 		
-		getListView().setOnItemClickListener(this);
-		
-		dataSource = new TaskContentProvider(this);
-		dataSource.open();
-		
-		List<Task> tasks = dataSource.getAllTasks();
-		ArrayAdapter<Task> adapter = new ArrayAdapter<Task>(this, R.layout.row_list_task, R.id.task_description, tasks);
 		setListAdapter(adapter);
 		
 		Spinner redPrimaryTaskSpinner = (Spinner) findViewById(R.id.red_primary_task_spinner);
@@ -39,8 +41,9 @@ public class MainTaskActivity extends ListActivity implements OnItemClickListene
 		greenPrimaryTaskSpinner.setAdapter(adapter);
 		bluePrimaryTaskSpinner.setAdapter(adapter);
 		
+		fillData();
+		
 	}
-	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -53,14 +56,12 @@ public class MainTaskActivity extends ListActivity implements OnItemClickListene
 		int id = item.getItemId();
 		switch(id) {
 			case (R.id.action_add_task):
-				dataSource.close();
 				Intent addNewTaskIntent = new Intent(this, NewTaskActivity.class);
 				addNewTaskIntent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 				startActivity(addNewTaskIntent);
 				break;
 				
 			case (R.id.action_completed_tasks):
-				dataSource.close();
 				Intent showCompletedTasksIntent = new Intent(this, CompletedTasksActivity.class);
 				showCompletedTasksIntent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 				startActivity(showCompletedTasksIntent);
@@ -75,35 +76,48 @@ public class MainTaskActivity extends ListActivity implements OnItemClickListene
 	}
 	
 	@Override
-	public void onItemClick(AdapterView<?> arg0, View view, int arg2, long arg3) {
-//		@SuppressWarnings("unchecked")
-//		ArrayAdapter<Task> adapter = (ArrayAdapter<Task>) getListAdapter();
-//		Task task = null;
-
-		/*
-		if (getListAdapter().getCount() > 0) {
-			ListView lv = getListView();
-			int position = lv.getPositionForView(view);
-			
-			task = (Task) getListAdapter().getItem(position);
-		}*/
+	public void onListItemClick(ListView listView, View view, int position, long id) {
+		super.onListItemClick(listView, view, position, id);
 		
-		dataSource.close();
+		Uri taskUri = Uri.parse(TaskContentProvider.CONTENT_URI + "/" + id);
+		
 		Intent updateTaskIntent = new Intent(this, UpdateTaskActivity.class);
 		updateTaskIntent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+		updateTaskIntent.putExtra(TaskContentProvider.CONTENT_ITEM_TYPE, taskUri);
+		
 		startActivity(updateTaskIntent);
+	}
 
+
+	@Override
+	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+		String[] projection = { TaskTable.COLUMN_ID, TaskTable.COLUMN_DESCRIPTION };
+		CursorLoader cursorLoader = new CursorLoader(this, TaskContentProvider.CONTENT_URI, projection, null, null, null);
+		
+		return cursorLoader;
+	}
+
+
+	@Override
+	public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+		adapter.swapCursor(cursor);
+	}
+
+
+	@Override
+	public void onLoaderReset(Loader<Cursor> loader) {
+		adapter.swapCursor(null);
 	}
 	
-	@Override
-	protected void onResume() {
-		dataSource.open();
-		super.onResume();
+	private void fillData() {
+		String[] from = new String[] { TaskTable.COLUMN_DESCRIPTION };
+		int[] to = new int[] { R.id.task_description };
+		
+		getLoaderManager().initLoader(0, null, this);
+		adapter = new SimpleCursorAdapter(this, R.layout.row_list_task, null, from, to, 0);
+		
+		setListAdapter(adapter);
 	}
-	
-	@Override
-	protected void onPause() {
-		dataSource.close();
-		super.onPause();
-	}
+
+
 }
