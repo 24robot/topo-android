@@ -8,14 +8,14 @@ import android.widget.ArrayAdapter;
 
 public class CompletedTasksActivity extends ListActivity {
 
-	private TaskDataSource dataSource;
+	private TaskContentProvider dataSource;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_completed_tasks);
 
-		dataSource = new TaskDataSource(this);
+		dataSource = new TaskContentProvider(this);
 		dataSource.open();
 		
 		List<Task> tasks = dataSource.getAllTasks();

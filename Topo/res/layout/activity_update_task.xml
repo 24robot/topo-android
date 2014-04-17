@@ -43,6 +43,7 @@
 	         <Button 
 	             android:layout_width="wrap_content"
 	             android:layout_height="wrap_content"
+	             android:onClick="onSaveTaskClick"
 	             android:text="@string/save_task"/>
          </LinearLayout>
          
@@ -53,6 +54,7 @@
 	         <Button 
 	             android:layout_width="wrap_content"
 	             android:layout_height="wrap_content"
+	             android:onClick="onDeleteTaskClick"
 	             android:text="@string/delete_task"/>
          </LinearLayout>
          

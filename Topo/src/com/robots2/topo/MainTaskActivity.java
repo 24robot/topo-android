@@ -15,7 +15,7 @@ import android.widget.Spinner;
 
 public class MainTaskActivity extends ListActivity implements OnItemClickListener{
 
-	private TaskDataSource dataSource;
+	private TaskContentProvider dataSource;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +24,7 @@ public class MainTaskActivity extends ListActivity implements OnItemClickListene
 		
 		getListView().setOnItemClickListener(this);
 		
-		dataSource = new TaskDataSource(this);
+		dataSource = new TaskContentProvider(this);
 		dataSource.open();
 		
 		List<Task> tasks = dataSource.getAllTasks();

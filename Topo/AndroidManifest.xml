@@ -15,7 +15,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.robots2.topo.MainTaskActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,7 +26,8 @@
         <activity
             android:name="com.robots2.topo.NewTaskActivity"
             android:label="@string/title_activity_add_task"
-            android:parentActivityName="com.robots2.topo.MainTaskActivity" >
+            android:parentActivityName="com.robots2.topo.MainTaskActivity" 
+            android:launchMode="singleTask" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.robots2.topo.MainTaskActivity" />
@@ -33,7 +35,8 @@
         <activity
             android:name="com.robots2.topo.UpdateTaskActivity"
             android:label="@string/title_activity_add_task"
-            android:parentActivityName="com.robots2.topo.MainTaskActivity" >
+            android:parentActivityName="com.robots2.topo.MainTaskActivity" 
+            android:launchMode="singleTask" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.robots2.topo.MainTaskActivity" />
@@ -41,11 +44,16 @@
         <activity
             android:name="com.robots2.topo.CompletedTasksActivity"
             android:label="@string/title_activity_completed_tasks"
-            android:parentActivityName="com.robots2.topo.MainTaskActivity" >
+            android:parentActivityName="com.robots2.topo.MainTaskActivity"
+            android:launchMode="singleTask"  >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.robots2.topo.MainTaskActivity" />
         </activity>
+        <provider 
+            android:name=".contentprovider.TaskContentProvder"
+            android:authorities="com.robots2.topo.contentprovider">
+        </provider>
     </application>
 
 </manifest>
