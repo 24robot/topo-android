@@ -52,7 +52,7 @@
         </activity>
         <provider 
             android:name=".contentprovider.TaskContentProvider"
-            android:authorities="com.robots2.topo.contentprovider"
+            android:authorities="com.robots2.topo.contentprovider.TaskContentProvider"
             android:exported="false">
         </provider>
     </application>

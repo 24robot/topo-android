@@ -1,14 +1,16 @@
 package com.robots2.topo;
 
-import com.robots2.topo.contentprovider.TaskContentProvider;
-
 import android.app.ListActivity;
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+
+import com.robots2.topo.contentprovider.TaskContentProvider;
 
 public class NewTaskActivity extends ListActivity {
 
@@ -21,6 +23,15 @@ public class NewTaskActivity extends ListActivity {
 		setContentView(R.layout.activity_new_task);
 		
 		taskDescriptionEditText = (EditText) findViewById(R.id.newTaskEditText);
+		taskDescriptionEditText.requestFocus();
+		taskDescriptionEditText.postDelayed(new Runnable() {
+           @Override
+           public void run() {
+               InputMethodManager keyboard = (InputMethodManager)
+               getSystemService(Context.INPUT_METHOD_SERVICE);
+               keyboard.showSoftInput(taskDescriptionEditText, 0);
+           }
+       },200);
 		
 		Bundle extras = getIntent().getExtras();
 		
@@ -34,7 +45,6 @@ public class NewTaskActivity extends ListActivity {
 	}
 	
 	private void fillData(Uri uri) {
-		// TODO Auto-generated method stub
 		String[] projection = { TaskTable.COLUMN_DESCRIPTION };
 		Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
 		

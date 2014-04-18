@@ -1,7 +1,5 @@
 package com.robots2.topo;
 
-import com.robots2.topo.contentprovider.TaskContentProvider;
-
 import android.app.ListActivity;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
@@ -16,6 +14,8 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
+
+import com.robots2.topo.contentprovider.TaskContentProvider;
 
 public class MainTaskActivity extends ListActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -42,7 +42,6 @@ public class MainTaskActivity extends ListActivity implements LoaderManager.Load
 		bluePrimaryTaskSpinner.setAdapter(adapter);
 		
 		fillData();
-		
 	}
 
 	@Override

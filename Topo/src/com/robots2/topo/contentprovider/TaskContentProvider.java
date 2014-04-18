@@ -3,9 +3,6 @@ package com.robots2.topo.contentprovider;
 import java.util.Arrays;
 import java.util.HashSet;
 
-import com.robots2.topo.TaskDatabaseHelper;
-import com.robots2.topo.TaskTable;
-
 import android.content.ContentProvider;
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -16,6 +13,9 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.text.TextUtils;
 
+import com.robots2.topo.TaskDatabaseHelper;
+import com.robots2.topo.TaskTable;
+
 public class TaskContentProvider extends ContentProvider {
 
 	private TaskDatabaseHelper database;
@@ -23,9 +23,9 @@ public class TaskContentProvider extends ContentProvider {
 	private static final int TASKS = 10;
 	private static final int TASK_ID = 20;
 	
-	private static final String AUTHORITY = "com.robots2.topo.contentprovider";	
+	private static final String AUTHORITY = "com.robots2.topo.contentprovider.TaskContentProvider";	
 	private static final String BASE_PATH = "tasks";	
-	public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + BASE_PATH);
+	public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH);
 	
 	public static final String CONTENT_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE + "/tasks";
 	public static final String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/task";
