@@ -13,6 +13,7 @@ public class TaskTable {
 	public static final String COLUMN_PARENTS = "parents";
 	public static final String COLUMN_CHILDREN = "children";
 	public static final String COLUMN_COLOR = "color";
+	public static final String COLUMN_ISPRIMARYCOLOR = "isprimarycolor";
 	
 	private static final String CREATE_TASKS_TABLE = "CREATE TABLE " 
 			+ TABLE_TASKS 
@@ -20,8 +21,9 @@ public class TaskTable {
             + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
 			+ COLUMN_DESCRIPTION + " TEXT NOT NULL, "			
 			+ COLUMN_COMPLETE + " INT NOT NULL, "
-			+ COLUMN_PARENTS + " TEXT NOT NULL, "
-			+ COLUMN_COLOR + " TEXT NOT NULL "
+			+ COLUMN_PARENTS + " TEXT, "
+			+ COLUMN_COLOR + " TEXT NOT NULL, "
+			+ COLUMN_ISPRIMARYCOLOR + " INT NOT NULL"
 			+ ")";
 	  
 	public static void onCreate(SQLiteDatabase database) {

@@ -85,6 +85,9 @@ public class NewTaskActivity extends ListActivity {
 		
 		ContentValues values = new ContentValues();
 		values.put(TaskTable.COLUMN_DESCRIPTION, taskDescription);
+		values.put(TaskTable.COLUMN_COLOR, "#FFFFFF");
+		values.put(TaskTable.COLUMN_COMPLETE, 0);
+		values.put(TaskTable.COLUMN_ISPRIMARYCOLOR, 0);
 		
 		if (taskUri == null) {
 			taskUri = getContentResolver().insert(TaskContentProvider.CONTENT_URI, values);

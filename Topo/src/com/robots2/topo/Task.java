@@ -9,6 +9,8 @@ public class Task {
 	private String mColor;
 	private boolean mComplete;
 	private List<String> mParentIds;	
+	private List<String> mChildrenIds;
+	private boolean mIsPrimary;
 	
 	public Task() {
 		
@@ -74,6 +76,14 @@ public class Task {
 		if (!removedSuccessfully) {
 			// Throw suitable error here
 		}
+	}
+	
+	public boolean isPrimary() {
+		return mIsPrimary;
+	}
+	
+	public void setPrimary(boolean primary) {
+		mIsPrimary = primary;
 	}
 	
 	public String toString() {

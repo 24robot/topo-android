@@ -1,5 +1,7 @@
 package com.robots2.topo;
 
+import java.util.ArrayList;
+
 import android.app.ListActivity;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
@@ -24,7 +26,9 @@ public class MainTaskActivity extends ListActivity implements LoaderManager.Load
 	private static final int DELETE_ID = Menu.FIRST + 1;
 	
 	private SimpleCursorAdapter adapter;
-	
+	private Spinner redPrimaryTaskSpinner;
+	private Spinner greenPrimaryTaskSpinner;
+	private Spinner bluePrimaryTaskSpinner;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,16 +37,14 @@ public class MainTaskActivity extends ListActivity implements LoaderManager.Load
 		
 		setListAdapter(adapter);
 		
-		Spinner redPrimaryTaskSpinner = (Spinner) findViewById(R.id.red_primary_task_spinner);
-		Spinner greenPrimaryTaskSpinner = (Spinner) findViewById(R.id.green_primary_task_spinner);
-		Spinner bluePrimaryTaskSpinner = (Spinner) findViewById(R.id.blue_primary_task_spinner);
-		
-		redPrimaryTaskSpinner.setAdapter(adapter);
-		greenPrimaryTaskSpinner.setAdapter(adapter);
-		bluePrimaryTaskSpinner.setAdapter(adapter);
+		redPrimaryTaskSpinner = (Spinner) findViewById(R.id.red_primary_task_spinner);
+		greenPrimaryTaskSpinner = (Spinner) findViewById(R.id.green_primary_task_spinner);
+		bluePrimaryTaskSpinner = (Spinner) findViewById(R.id.blue_primary_task_spinner);
 		
 		fillData();
+		updateSpinners();
 	}
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -118,5 +120,24 @@ public class MainTaskActivity extends ListActivity implements LoaderManager.Load
 		setListAdapter(adapter);
 	}
 
+	private void updateSpinners() {
+		Uri uri = TaskContentProvider.CONTENT_URI;
+		String[] projection = { TaskTable.COLUMN_DESCRIPTION };
+		String selection = TaskTable.COLUMN_ISPRIMARYCOLOR + " = " + "0";
+		
+		Cursor cursor = getContentResolver().query(uri, projection, selection, null, null);
+		
+		ArrayList<String> primaryTasksList = new ArrayList<String>();
+		
+		cursor.moveToFirst();
+		while(!cursor.isAfterLast()) {
+		     primaryTasksList.add(cursor.getString(cursor.getColumnIndex(TaskTable.COLUMN_DESCRIPTION)));
+		     cursor.moveToNext();
+		}
+		
+		redPrimaryTaskSpinner.setAdapter(adapter);
+		greenPrimaryTaskSpinner.setAdapter(adapter);
+		bluePrimaryTaskSpinner.setAdapter(adapter);
+	}
 
 }
