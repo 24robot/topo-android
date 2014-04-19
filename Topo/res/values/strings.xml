@@ -18,7 +18,7 @@
     <string name="green_primary_task">Green Primary Task</string>
     <string name="blue_primary_task">Blue Primary Task</string>
     <string name="description">Description</string>
-    <string name="title_activity_add_task">AddTaskActivity</string>
+    <string name="title_activity_add_task">Add Task</string>
     <string name="task_description_placeholder">Description of Task</string>
     <string name="add_parents_text">Add Parents</string>
     <string name="update_parents_text">Update Parents</string>
@@ -26,6 +26,6 @@
     <string name="save_task">Save Task</string>
     <string name="delete_task">Delete Task</string>
     <string name="completed_tasks">Completed Tasks</string>
-    <string name="title_activity_completed_tasks">CompletedTasksActivity</string>
+    <string name="title_activity_completed_tasks">Completed Tasks</string>
 
 </resources>

@@ -1,14 +1,15 @@
 package com.robots2.topo;
 
 import android.app.ListActivity;
+import android.app.LoaderManager.LoaderCallbacks;
 import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.SimpleCursorAdapter;
 
 import com.robots2.topo.contentprovider.TaskContentProvider;
 
@@ -16,6 +17,7 @@ public class NewTaskActivity extends ListActivity {
 
 	private EditText taskDescriptionEditText;
 	private Uri taskUri;
+	private SimpleCursorAdapter adapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,14 +47,12 @@ public class NewTaskActivity extends ListActivity {
 	}
 	
 	private void fillData(Uri uri) {
-		String[] projection = { TaskTable.COLUMN_DESCRIPTION };
-		Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
+		String[] from = new String[] { TaskTable.COLUMN_DESCRIPTION };
+		int[] to = new int[] { R.id.task_description };
 		
-		if (cursor != null) {
-			cursor.moveToFirst();
-		}
+		adapter = new SimpleCursorAdapter(this, R.layout.row_list_task_with_checkbox, null, from, to, 0);
 		
-		cursor.close();
+		setListAdapter(adapter);
 	}
 
 	public void onAddTaskClick(View view) {
@@ -85,7 +85,7 @@ public class NewTaskActivity extends ListActivity {
 		
 		ContentValues values = new ContentValues();
 		values.put(TaskTable.COLUMN_DESCRIPTION, taskDescription);
-		values.put(TaskTable.COLUMN_COLOR, "#FFFFFF");
+		values.put(TaskTable.COLUMN_COLOR, "#000000");
 		values.put(TaskTable.COLUMN_COMPLETE, 0);
 		values.put(TaskTable.COLUMN_ISPRIMARYCOLOR, 0);
 		
