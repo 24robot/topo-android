@@ -128,7 +128,7 @@ public class NewTaskActivity extends ListActivity implements LoaderManager.Loade
 		
 		
 		values.put(TaskTable.COLUMN_PARENTS, "0");
-		values.put(TaskTable.COLUMN_ISPRIMARYCOLOR, 0);
+		values.put(TaskTable.COLUMN_PRIMARYCOLOR, 0);
 		
 		if (taskUri == null) {
 			taskUri = getContentResolver().insert(TaskContentProvider.CONTENT_URI, values);

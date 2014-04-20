@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
@@ -39,6 +40,9 @@ public class MainTaskActivity extends ListActivity implements LoaderManager.Load
 		bluePrimaryTaskSpinner = (Spinner) findViewById(R.id.blue_primary_task_spinner);
 		
 		fillData();
+		
+		// getLoaderManager().initLoader(10, null, this);
+		// loadRedPrimary();
 	}
 
 	private void fillData() {
@@ -47,13 +51,12 @@ public class MainTaskActivity extends ListActivity implements LoaderManager.Load
 
 		ListView mListView = (ListView) findViewById(android.R.id.list);
 		mAdapter = new SimpleCursorAdapter(this, R.layout.row_list_task, null, mFromColumns, mToFields, 0);
+		mListView.setAdapter(mAdapter);
 		
 		String[] mFromColumnForSpinner = new String[] { TaskTable.COLUMN_DESCRIPTION, TaskTable.COLUMN_ID };
 		int[] mToFieldsForSpinner = new int[] { R.id.task_description_spinner, R.id.task_id_spinner };
 		mSpinnerAdapter = new SimpleCursorAdapter(this, R.layout.row_spinner_task, null,
 				mFromColumnForSpinner, mToFieldsForSpinner, 0);
-
-		mListView.setAdapter(mAdapter);
 		
 		redPrimaryTaskSpinner.setAdapter(mSpinnerAdapter);
 		greenPrimaryTaskSpinner.setAdapter(mSpinnerAdapter);
@@ -65,7 +68,19 @@ public class MainTaskActivity extends ListActivity implements LoaderManager.Load
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 		String[] projection = { TaskTable.COLUMN_ID, TaskTable.COLUMN_DESCRIPTION };
 		String selectionOfTasksWithNoParents = "(" + TaskTable.COLUMN_PARENTS + "= 0 "
-				+ "and " + TaskTable.COLUMN_ISPRIMARYCOLOR + " = 0 "
+				+ "and " + TaskTable.COLUMN_PRIMARYCOLOR + " = 0 "
+				+ "and " + TaskTable.COLUMN_COMPLETE + " = 0 )";
+		
+		String selectionOfRedTask = "(" + TaskTable.COLUMN_PARENTS + "= 0 "
+				+ "and " + TaskTable.COLUMN_PRIMARYCOLOR + " = 10 "
+				+ "and " + TaskTable.COLUMN_COMPLETE + " = 0 )";
+		
+		String selectionOfGreenTask = "(" + TaskTable.COLUMN_PARENTS + "= 0 "
+				+ "and " + TaskTable.COLUMN_PRIMARYCOLOR + " = 20 "
+				+ "and " + TaskTable.COLUMN_COMPLETE + " = 0 )";
+		
+		String selectionOfBlueTask = "(" + TaskTable.COLUMN_PARENTS + "= 0 "
+				+ "and " + TaskTable.COLUMN_PRIMARYCOLOR + " = 30 "
 				+ "and " + TaskTable.COLUMN_COMPLETE + " = 0 )";
 		
 		CursorLoader cursorLoader = null;
@@ -75,6 +90,18 @@ public class MainTaskActivity extends ListActivity implements LoaderManager.Load
 				cursorLoader = new CursorLoader(this, TaskContentProvider.CONTENT_URI, projection, 
 						selectionOfTasksWithNoParents, null, null);
 				break;
+			case 10:
+				cursorLoader = new CursorLoader(this, TaskContentProvider.CONTENT_URI, projection, 
+						selectionOfRedTask, null, null);
+				break;
+			case 20:
+				cursorLoader = new CursorLoader(this, TaskContentProvider.CONTENT_URI, projection, 
+						selectionOfGreenTask, null, null);
+				break;
+			case 30:
+				cursorLoader = new CursorLoader(this, TaskContentProvider.CONTENT_URI, projection, 
+						selectionOfBlueTask, null, null);
+				break;
 				
 		}
 		
@@ -83,8 +110,23 @@ public class MainTaskActivity extends ListActivity implements LoaderManager.Load
 
 	@Override
 	public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-		mAdapter.swapCursor(cursor);
-		mSpinnerAdapter.swapCursor(cursor);
+		switch(loader.getId()) {
+			case 0:
+				mAdapter.swapCursor(cursor);
+				mSpinnerAdapter.swapCursor(cursor);
+				break;
+			case 10:
+				if (cursor != null && cursor.getCount() > 0) {
+					String id = cursor.getString(cursor.getColumnIndex(TaskTable.COLUMN_ID));
+				}
+				break;
+			case 20:
+
+				break;
+			case 30:
+
+				break;
+		}
 	}
 
 	@Override
@@ -109,48 +151,103 @@ public class MainTaskActivity extends ListActivity implements LoaderManager.Load
 		
 		startActivity(updateTaskIntent);
 	}
-
-	public void makeRedPrimary(View v) {
+	
+	public void loadRedPrimary() {
 		TextView primaryTextView = (TextView) findViewById(R.id.red_primary_task_selected_text);
+		TextView primaryIdTextView = (TextView) findViewById(R.id.red_primary_task_selected_id);
+		
+//		primaryTextView.setText(((TextView) redPrimaryTextViewAdapter.getView(0, null, null)).getText());
+//		primaryIdTextView.setText(((TextView) redPrimaryTextViewAdapter.getView(1, null, null)).getText());
+	}
+
+	public void makeTaskRedPrimary(View v) {
 		TextView idTextView = (TextView) redPrimaryTaskSpinner.findViewById(R.id.task_id_spinner);
-		TextView descriptionTextView = (TextView) redPrimaryTaskSpinner.findViewById(R.id.task_description_spinner);
 		
 		String selectionOfTasksWithSameId = "(" + TaskTable.COLUMN_ID + " = " + idTextView.getText() + ")";
 		ContentValues values = new ContentValues();
 		
-		values.put(TaskTable.COLUMN_ISPRIMARYCOLOR, 1);
+		values.put(TaskTable.COLUMN_PRIMARYCOLOR, 10);
 		getContentResolver().update(TaskContentProvider.CONTENT_URI, values, selectionOfTasksWithSameId, null);
-		
-		primaryTextView.setText(descriptionTextView.getText().toString());
 	}
 	
-	public void makeGreenPrimary(View v) {
+	public void makeTaskGreenPrimary(View v) {
 		TextView primaryTextView = (TextView) findViewById(R.id.green_primary_task_selected_text);
+		TextView primaryIdTextView = (TextView) findViewById(R.id.green_primary_task_selected_id);
 		TextView idTextView = (TextView) greenPrimaryTaskSpinner.findViewById(R.id.task_id_spinner);
 		TextView descriptionTextView = (TextView) greenPrimaryTaskSpinner.findViewById(R.id.task_description_spinner);
 		
 		String selectionOfTasksWithSameId = "(" + TaskTable.COLUMN_ID + " = " + idTextView.getText() + ")";
 		ContentValues values = new ContentValues();
 		
-		values.put(TaskTable.COLUMN_ISPRIMARYCOLOR, 1);
+		values.put(TaskTable.COLUMN_PRIMARYCOLOR, 20);
 		getContentResolver().update(TaskContentProvider.CONTENT_URI, values, selectionOfTasksWithSameId, null);
 		
+		primaryIdTextView.setText(idTextView.getText().toString());
 		primaryTextView.setText(descriptionTextView.getText().toString());
 	}
 
-	public void makeBluePrimary(View v) {
+	public void makeTaskBluePrimary(View v) {
 		TextView primaryTextView = (TextView) findViewById(R.id.blue_primary_task_selected_text);
+		TextView primaryIdTextView = (TextView) findViewById(R.id.blue_primary_task_selected_id);
 		TextView idTextView = (TextView) bluePrimaryTaskSpinner.findViewById(R.id.task_id_spinner);
 		TextView descriptionTextView = (TextView) bluePrimaryTaskSpinner.findViewById(R.id.task_description_spinner);
 		
 		String selectionOfTasksWithSameId = "(" + TaskTable.COLUMN_ID + " = " + idTextView.getText() + ")";
 		ContentValues values = new ContentValues();
 		
-		values.put(TaskTable.COLUMN_ISPRIMARYCOLOR, 1);
+		values.put(TaskTable.COLUMN_PRIMARYCOLOR, 30);
 		getContentResolver().update(TaskContentProvider.CONTENT_URI, values, selectionOfTasksWithSameId, null);
 		
+		primaryIdTextView.setText(idTextView.getText().toString());
 		primaryTextView.setText(descriptionTextView.getText().toString());
 	}
+	
+	
+	public void clearRed(View v) {
+		TextView primaryTextView = (TextView) findViewById(R.id.red_primary_task_selected_text);
+		TextView primaryIdTextView = (TextView) findViewById(R.id.red_primary_task_selected_id);
+		
+		String selectionOfTasksWithSameId = "(" + TaskTable.COLUMN_PRIMARYCOLOR + " = 10)";
+		ContentValues values = new ContentValues();
+		
+		values.put(TaskTable.COLUMN_PRIMARYCOLOR, 0);
+		getContentResolver().update(TaskContentProvider.CONTENT_URI, values, selectionOfTasksWithSameId, null);
+		
+		primaryIdTextView.setText("");
+		primaryTextView.setText("");
+		primaryTextView.setHint(R.string.empty);
+	}
+	
+	public void clearGreen(View v) {
+		TextView primaryTextView = (TextView) findViewById(R.id.green_primary_task_selected_text);
+		TextView primaryIdTextView = (TextView) findViewById(R.id.green_primary_task_selected_id);
+		
+		String selectionOfTasksWithSameId = "(" + TaskTable.COLUMN_PRIMARYCOLOR + " = 20)";
+		ContentValues values = new ContentValues();
+		
+		values.put(TaskTable.COLUMN_PRIMARYCOLOR, 0);
+		getContentResolver().update(TaskContentProvider.CONTENT_URI, values, selectionOfTasksWithSameId, null);
+		
+		primaryIdTextView.setText("");
+		primaryTextView.setText("");
+		primaryTextView.setHint(R.string.empty);
+	}
+
+	public void clearBlue(View v) {
+		TextView primaryTextView = (TextView) findViewById(R.id.blue_primary_task_selected_text);
+		TextView primaryIdTextView = (TextView) findViewById(R.id.blue_primary_task_selected_id);
+		
+		String selectionOfTasksWithSameId = "(" + TaskTable.COLUMN_PRIMARYCOLOR + " = 30)";
+		ContentValues values = new ContentValues();
+		
+		values.put(TaskTable.COLUMN_PRIMARYCOLOR, 0);
+		getContentResolver().update(TaskContentProvider.CONTENT_URI, values, selectionOfTasksWithSameId, null);
+		
+		primaryIdTextView.setText("");
+		primaryTextView.setText("");
+		primaryTextView.setHint(R.string.empty);
+	}
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

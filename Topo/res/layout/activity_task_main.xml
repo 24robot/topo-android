@@ -37,6 +37,13 @@
                    android:layout_gravity="center_vertical"
                    android:contentDescription="@string/description" />         
                    
+                <TextView
+                   android:id="@+id/red_primary_task_selected_id"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginLeft="8dp"
+                   android:textAppearance="?android:attr/textAppearanceMedium" />
+                
                <TextView
 	             android:id="@+id/red_primary_task_selected_text"
 	             android:layout_width="0dp"
@@ -46,7 +53,6 @@
 	             android:layout_marginLeft="8dp"
 	             android:textAppearance="?android:attr/textAppearanceMedium" />
                    
-               
            </LinearLayout>
            
             <LinearLayout 
@@ -62,6 +68,13 @@
                    android:background="@color/android_light_green"
                    android:contentDescription="@string/description" />         
                    
+                <TextView
+                   android:id="@+id/green_primary_task_selected_id"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginLeft="8dp"
+                   android:textAppearance="?android:attr/textAppearanceMedium" />
+                
                <TextView
 	             android:id="@+id/green_primary_task_selected_text"
 	             android:layout_width="0dp"
@@ -83,7 +96,14 @@
                  android:layout_height="16dp"
                  android:layout_gravity="center_vertical"
                  android:background="@color/android_light_blue"
-                 android:contentDescription="@string/description" />     
+                 android:contentDescription="@string/description" />
+             
+              <TextView
+                   android:id="@+id/blue_primary_task_selected_id"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginLeft="8dp"
+                   android:textAppearance="?android:attr/textAppearanceMedium" />
              
                <TextView
 	             android:id="@+id/blue_primary_task_selected_text"
@@ -143,8 +163,18 @@
 	            android:layout_weight="1"
 	            android:layout_height="wrap_content"
 	            android:layout_marginLeft="8dp"
-	            android:text="@string/make_red_primary"
-	            android:onClick="makeRedPrimary"
+	            android:text="@string/add_button_text"
+	            android:onClick="makeTaskRedPrimary"
+	            android:textAppearance="?android:attr/textAppearanceMedium"/>
+         
+         <Button 
+	            android:id="@+id/red_clear_button"
+	            android:layout_width="0dp"
+	            android:layout_weight="1"
+	            android:layout_height="wrap_content"
+	            android:layout_marginRight="8dp"
+	            android:text="@string/clear_button_text"
+	            android:onClick="clearRed"
 	            android:textAppearance="?android:attr/textAppearanceMedium"/>
          
          <Button 
@@ -153,8 +183,18 @@
 	            android:layout_weight="1"
 	            android:layout_height="wrap_content"
 	            android:layout_marginLeft="8dp"
-	            android:text="@string/make_green_primary"
-	            android:onClick="makeGreenPrimary"
+	            android:text="@string/add_button_text"
+	            android:onClick="makeTaskGreenPrimary"
+	            android:textAppearance="?android:attr/textAppearanceMedium"/>
+         
+         <Button 
+	            android:id="@+id/green_clear_button"
+	            android:layout_width="0dp"
+	            android:layout_weight="1"
+	            android:layout_height="wrap_content"
+	            android:layout_marginRight="8dp"
+	            android:text="@string/clear_button_text"
+	            android:onClick="clearGreen"
 	            android:textAppearance="?android:attr/textAppearanceMedium"/>
          
          <Button 
@@ -163,8 +203,18 @@
 	            android:layout_weight="1"
 	            android:layout_height="wrap_content"
 	            android:layout_marginLeft="8dp"
-	            android:text="@string/make_blue_primary"
-	            android:onClick="makeBluePrimary"
+	            android:text="@string/add_button_text"
+	            android:onClick="makeTaskBluePrimary"
+	            android:textAppearance="?android:attr/textAppearanceMedium"/>
+         
+         <Button 
+	            android:id="@+id/blue_clear_button"
+	            android:layout_width="0dp"
+	            android:layout_weight="1"
+	            android:layout_height="wrap_content"
+	            android:layout_marginRight="8dp"
+	            android:text="@string/clear_button_text"
+	            android:onClick="clearBlue"
 	            android:textAppearance="?android:attr/textAppearanceMedium"/>
          
      </LinearLayout>
