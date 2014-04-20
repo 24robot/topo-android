@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
@@ -87,12 +88,16 @@ public class MainTaskActivity extends ListActivity implements LoaderManager.Load
 	@Override
 	public void onListItemClick(ListView listView, View view, int position, long id) {
 		super.onListItemClick(listView, view, position, id);
+	
+//		LinearLayout lv = (LinearLayout) listView.getChildAt(position);
+//		TextView tvId = (TextView) lv.getChildAt(1);
 		
-		Uri taskUri = Uri.parse(TaskContentProvider.CONTENT_URI + "/" + id);
+		Uri taskUri = Uri.parse(TaskContentProvider.CONTENT_URI + "/" + String.valueOf(id));
 		
 		Intent updateTaskIntent = new Intent(this, UpdateTaskActivity.class);
 		updateTaskIntent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 		updateTaskIntent.putExtra(TaskContentProvider.CONTENT_ITEM_TYPE, taskUri);
+		updateTaskIntent.putExtra("_id", String.valueOf(id));
 		
 		startActivity(updateTaskIntent);
 	}
