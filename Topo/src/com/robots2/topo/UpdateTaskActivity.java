@@ -124,7 +124,8 @@ public class UpdateTaskActivity extends ListActivity implements LoaderManager.Lo
 	@Override
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 		String[] projection = { TaskTable.COLUMN_ID, TaskTable.COLUMN_DESCRIPTION };
-		String selectionOfTasksWithDifferentId = "(" + TaskTable.COLUMN_ID + " != " + mId + ")";
+		String selectionOfTasksWithDifferentId = "(" + TaskTable.COLUMN_ID + " != " + mId 
+				+ " and " + TaskTable.COLUMN_COMPLETE + " = " + "0 )";
 		CursorLoader cursorLoader = new CursorLoader(this, TaskContentProvider.CONTENT_URI, projection, 
 				selectionOfTasksWithDifferentId, null, null);
 		return cursorLoader;

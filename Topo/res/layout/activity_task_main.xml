@@ -42,6 +42,7 @@
 	             android:layout_width="0dp"
 	             android:layout_height="wrap_content"
 	             android:layout_weight="1"
+	             android:hint="@string/empty"
 	             android:layout_marginLeft="8dp"
 	             android:textAppearance="?android:attr/textAppearanceMedium" />
                    
@@ -67,6 +68,7 @@
 	             android:layout_height="wrap_content"
 	             android:layout_weight="1"
 	             android:layout_marginLeft="8dp"
+	             android:hint="@string/empty"
 	             android:textAppearance="?android:attr/textAppearanceMedium" />
            </LinearLayout>
            
@@ -89,6 +91,7 @@
 	             android:layout_height="wrap_content"
 	             android:layout_weight="1"
 	             android:layout_marginLeft="8dp"
+	             android:hint="@string/empty"
 	             android:textAppearance="?android:attr/textAppearanceMedium" />
           	</LinearLayout>
           	
@@ -124,6 +127,44 @@
 	            android:layout_height="wrap_content"
 	            android:layout_marginLeft="8dp"
 	            android:prompt="@string/empty"
+	            android:textAppearance="?android:attr/textAppearanceMedium"/>
+         
+     </LinearLayout>
+     
+     
+     <LinearLayout 
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:orientation="horizontal">
+         
+         <Button 
+	            android:id="@+id/red_primary_task_button"
+	            android:layout_width="0dp"
+	            android:layout_weight="1"
+	            android:layout_height="wrap_content"
+	            android:layout_marginLeft="8dp"
+	            android:text="@string/make_red_primary"
+	            android:onClick="makeRedPrimary"
+	            android:textAppearance="?android:attr/textAppearanceMedium"/>
+         
+         <Button 
+	            android:id="@+id/green_primary_task_button"
+	            android:layout_width="0dp"
+	            android:layout_weight="1"
+	            android:layout_height="wrap_content"
+	            android:layout_marginLeft="8dp"
+	            android:text="@string/make_green_primary"
+	            android:onClick="makeGreenPrimary"
+	            android:textAppearance="?android:attr/textAppearanceMedium"/>
+         
+         <Button 
+	            android:id="@+id/blue_primary_task_button"
+	            android:layout_width="0dp"
+	            android:layout_weight="1"
+	            android:layout_height="wrap_content"
+	            android:layout_marginLeft="8dp"
+	            android:text="@string/make_blue_primary"
+	            android:onClick="makeBluePrimary"
 	            android:textAppearance="?android:attr/textAppearanceMedium"/>
          
      </LinearLayout>

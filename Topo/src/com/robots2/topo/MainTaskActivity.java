@@ -1,9 +1,8 @@
 package com.robots2.topo;
 
-import java.util.ArrayList;
-
 import android.app.ListActivity;
 import android.app.LoaderManager;
+import android.content.ContentValues;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
@@ -13,9 +12,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
@@ -26,6 +22,7 @@ import com.robots2.topo.contentprovider.TaskContentProvider;
 public class MainTaskActivity extends ListActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
 	private SimpleCursorAdapter mAdapter;
+	private SimpleCursorAdapter mSpinnerAdapter;
 	private Spinner redPrimaryTaskSpinner;
 	private Spinner greenPrimaryTaskSpinner;
 	private Spinner bluePrimaryTaskSpinner;
@@ -50,14 +47,25 @@ public class MainTaskActivity extends ListActivity implements LoaderManager.Load
 
 		ListView mListView = (ListView) findViewById(android.R.id.list);
 		mAdapter = new SimpleCursorAdapter(this, R.layout.row_list_task, null, mFromColumns, mToFields, 0);
+		
+		String[] mFromColumnForSpinner = new String[] { TaskTable.COLUMN_DESCRIPTION, TaskTable.COLUMN_ID };
+		int[] mToFieldsForSpinner = new int[] { R.id.task_description_spinner, R.id.task_id_spinner };
+		mSpinnerAdapter = new SimpleCursorAdapter(this, R.layout.row_spinner_task, null,
+				mFromColumnForSpinner, mToFieldsForSpinner, 0);
 
 		mListView.setAdapter(mAdapter);
+		
+		redPrimaryTaskSpinner.setAdapter(mSpinnerAdapter);
+		greenPrimaryTaskSpinner.setAdapter(mSpinnerAdapter);
+		bluePrimaryTaskSpinner.setAdapter(mSpinnerAdapter);
+		
 	}
 	
 	@Override
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 		String[] projection = { TaskTable.COLUMN_ID, TaskTable.COLUMN_DESCRIPTION };
 		String selectionOfTasksWithNoParents = "(" + TaskTable.COLUMN_PARENTS + "= 0 "
+				+ "and " + TaskTable.COLUMN_ISPRIMARYCOLOR + " = 0 "
 				+ "and " + TaskTable.COLUMN_COMPLETE + " = 0 )";
 		
 		CursorLoader cursorLoader = null;
@@ -76,11 +84,13 @@ public class MainTaskActivity extends ListActivity implements LoaderManager.Load
 	@Override
 	public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
 		mAdapter.swapCursor(cursor);
+		mSpinnerAdapter.swapCursor(cursor);
 	}
 
 	@Override
 	public void onLoaderReset(Loader<Cursor> loader) {
 		mAdapter.swapCursor(null);
+		mSpinnerAdapter.swapCursor(null);
 	}
 
 	@Override
@@ -100,76 +110,48 @@ public class MainTaskActivity extends ListActivity implements LoaderManager.Load
 		startActivity(updateTaskIntent);
 	}
 
-	private void updateSpinners(Cursor cursor) {
-		ArrayList<String> primaryTasksList = new ArrayList<String>();
-		primaryTasksList.add("None");
-		
-		cursor.moveToFirst();
-		while(!cursor.isAfterLast()) {
-		     primaryTasksList.add(cursor.getString(cursor.getColumnIndex(TaskTable.COLUMN_DESCRIPTION)));
-		     cursor.moveToNext();
-		}
-		
-		ArrayAdapter<String> primaryTasksAdapter = new ArrayAdapter<String>(getApplicationContext(), 
-				R.layout.row_spinner_task, primaryTasksList);
-		
-		redPrimaryTaskSpinner.setAdapter(primaryTasksAdapter);
-		greenPrimaryTaskSpinner.setAdapter(primaryTasksAdapter);
-		bluePrimaryTaskSpinner.setAdapter(primaryTasksAdapter);
-		
-		AdapterView.OnItemSelectedListener redPrimaryTaskSpinnerListener = new AdapterView.OnItemSelectedListener () {
-			@Override
-			public void onItemSelected(AdapterView<?> arg0, View view, int arg2, long arg3) {
-				setRedPrimaryTextView();
-			}
-
-			@Override
-			public void onNothingSelected(AdapterView<?> arg0) {
-			}
-	    };
-	    
-		AdapterView.OnItemSelectedListener greenPrimaryTaskSpinnerListener = new AdapterView.OnItemSelectedListener () {
-			@Override
-			public void onItemSelected(AdapterView<?> arg0, View view, int arg2, long arg3) {
-				setGreenPrimaryTextView();
-			}
-
-			@Override
-			public void onNothingSelected(AdapterView<?> arg0) {	
-			}
-	    };
-	    
-	    AdapterView.OnItemSelectedListener bluePrimaryTaskSpinnerListener = new AdapterView.OnItemSelectedListener () {
-			@Override
-			public void onItemSelected(AdapterView<?> arg0, View view, int arg2, long arg3) {
-				setBluePrimaryTextView();
-			}
-
-			@Override
-			public void onNothingSelected(AdapterView<?> arg0) {	
-			}
-	    };
-	    
-	    redPrimaryTaskSpinner.setOnItemSelectedListener(redPrimaryTaskSpinnerListener);
-	    greenPrimaryTaskSpinner.setOnItemSelectedListener(greenPrimaryTaskSpinnerListener);
-	    bluePrimaryTaskSpinner.setOnItemSelectedListener(bluePrimaryTaskSpinnerListener);
-	}
-
-	private void setRedPrimaryTextView() {
+	public void makeRedPrimary(View v) {
 		TextView primaryTextView = (TextView) findViewById(R.id.red_primary_task_selected_text);
-		primaryTextView.setText(redPrimaryTaskSpinner.getSelectedItem().toString());
+		TextView idTextView = (TextView) redPrimaryTaskSpinner.findViewById(R.id.task_id_spinner);
+		TextView descriptionTextView = (TextView) redPrimaryTaskSpinner.findViewById(R.id.task_description_spinner);
+		
+		String selectionOfTasksWithSameId = "(" + TaskTable.COLUMN_ID + " = " + idTextView.getText() + ")";
+		ContentValues values = new ContentValues();
+		
+		values.put(TaskTable.COLUMN_ISPRIMARYCOLOR, 1);
+		getContentResolver().update(TaskContentProvider.CONTENT_URI, values, selectionOfTasksWithSameId, null);
+		
+		primaryTextView.setText(descriptionTextView.getText().toString());
 	}
 	
-	private void setGreenPrimaryTextView() {
+	public void makeGreenPrimary(View v) {
 		TextView primaryTextView = (TextView) findViewById(R.id.green_primary_task_selected_text);
-		primaryTextView.setText(greenPrimaryTaskSpinner.getSelectedItem().toString());
+		TextView idTextView = (TextView) greenPrimaryTaskSpinner.findViewById(R.id.task_id_spinner);
+		TextView descriptionTextView = (TextView) greenPrimaryTaskSpinner.findViewById(R.id.task_description_spinner);
+		
+		String selectionOfTasksWithSameId = "(" + TaskTable.COLUMN_ID + " = " + idTextView.getText() + ")";
+		ContentValues values = new ContentValues();
+		
+		values.put(TaskTable.COLUMN_ISPRIMARYCOLOR, 1);
+		getContentResolver().update(TaskContentProvider.CONTENT_URI, values, selectionOfTasksWithSameId, null);
+		
+		primaryTextView.setText(descriptionTextView.getText().toString());
 	}
-	
-	private void setBluePrimaryTextView() {
+
+	public void makeBluePrimary(View v) {
 		TextView primaryTextView = (TextView) findViewById(R.id.blue_primary_task_selected_text);
-		primaryTextView.setText(bluePrimaryTaskSpinner.getSelectedItem().toString());
+		TextView idTextView = (TextView) bluePrimaryTaskSpinner.findViewById(R.id.task_id_spinner);
+		TextView descriptionTextView = (TextView) bluePrimaryTaskSpinner.findViewById(R.id.task_description_spinner);
+		
+		String selectionOfTasksWithSameId = "(" + TaskTable.COLUMN_ID + " = " + idTextView.getText() + ")";
+		ContentValues values = new ContentValues();
+		
+		values.put(TaskTable.COLUMN_ISPRIMARYCOLOR, 1);
+		getContentResolver().update(TaskContentProvider.CONTENT_URI, values, selectionOfTasksWithSameId, null);
+		
+		primaryTextView.setText(descriptionTextView.getText().toString());
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.main_task, menu);
