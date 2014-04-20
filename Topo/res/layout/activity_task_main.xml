@@ -157,66 +157,78 @@
          android:layout_height="wrap_content"
          android:orientation="horizontal">
          
-         <Button 
-	            android:id="@+id/red_primary_task_button"
-	            android:layout_width="0dp"
-	            android:layout_weight="1"
-	            android:layout_height="wrap_content"
-	            android:layout_marginLeft="8dp"
-	            android:text="@string/add_button_text"
-	            android:onClick="makeTaskRedPrimary"
-	            android:textAppearance="?android:attr/textAppearanceMedium"/>
+         <LinearLayout 
+             android:layout_width="0dp"
+             android:layout_weight="1"
+             android:layout_height="wrap_content"
+             android:orientation="vertical">
+	         <Button 
+		            android:id="@+id/red_primary_task_button"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:layout_marginLeft="8dp"
+		            android:text="@string/add_button_text"
+		            android:onClick="makeTaskRedPrimary"
+		            android:textAppearance="?android:attr/textAppearanceMedium"/>
+	         
+	         <Button 
+		            android:id="@+id/red_clear_button"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:layout_marginLeft="8dp"
+		            android:text="@string/clear_button_text"
+		            android:onClick="clearRed"
+		            android:textAppearance="?android:attr/textAppearanceMedium"/>
          
-         <Button 
-	            android:id="@+id/red_clear_button"
-	            android:layout_width="0dp"
-	            android:layout_weight="1"
-	            android:layout_height="wrap_content"
-	            android:layout_marginRight="8dp"
-	            android:text="@string/clear_button_text"
-	            android:onClick="clearRed"
-	            android:textAppearance="?android:attr/textAppearanceMedium"/>
+         </LinearLayout>
          
-         <Button 
-	            android:id="@+id/green_primary_task_button"
-	            android:layout_width="0dp"
-	            android:layout_weight="1"
-	            android:layout_height="wrap_content"
-	            android:layout_marginLeft="8dp"
-	            android:text="@string/add_button_text"
-	            android:onClick="makeTaskGreenPrimary"
-	            android:textAppearance="?android:attr/textAppearanceMedium"/>
+         <LinearLayout 
+             android:layout_width="0dp"
+             android:layout_weight="1"
+             android:layout_height="wrap_content"
+             android:orientation="vertical">
+	         <Button 
+		            android:id="@+id/green_primary_task_button"
+		          	android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:layout_marginLeft="8dp"
+		            android:text="@string/add_button_text"
+		            android:onClick="makeTaskGreenPrimary"
+		            android:textAppearance="?android:attr/textAppearanceMedium"/>
+	         
+	         <Button 
+		            android:id="@+id/green_clear_button"
+					android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:layout_marginLeft="8dp"
+		            android:text="@string/clear_button_text"
+		            android:onClick="clearGreen"
+		            android:textAppearance="?android:attr/textAppearanceMedium"/>
+         </LinearLayout>
          
-         <Button 
-	            android:id="@+id/green_clear_button"
-	            android:layout_width="0dp"
-	            android:layout_weight="1"
-	            android:layout_height="wrap_content"
-	            android:layout_marginRight="8dp"
-	            android:text="@string/clear_button_text"
-	            android:onClick="clearGreen"
-	            android:textAppearance="?android:attr/textAppearanceMedium"/>
-         
-         <Button 
-	            android:id="@+id/blue_primary_task_button"
-	            android:layout_width="0dp"
-	            android:layout_weight="1"
-	            android:layout_height="wrap_content"
-	            android:layout_marginLeft="8dp"
-	            android:text="@string/add_button_text"
-	            android:onClick="makeTaskBluePrimary"
-	            android:textAppearance="?android:attr/textAppearanceMedium"/>
-         
-         <Button 
-	            android:id="@+id/blue_clear_button"
-	            android:layout_width="0dp"
-	            android:layout_weight="1"
-	            android:layout_height="wrap_content"
-	            android:layout_marginRight="8dp"
-	            android:text="@string/clear_button_text"
-	            android:onClick="clearBlue"
-	            android:textAppearance="?android:attr/textAppearanceMedium"/>
-         
+         <LinearLayout 
+             android:layout_width="0dp"
+             android:layout_weight="1"
+             android:layout_height="wrap_content"
+             android:orientation="vertical">
+	         <Button 
+		            android:id="@+id/blue_primary_task_button"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:layout_marginLeft="8dp"
+		            android:text="@string/add_button_text"
+		            android:onClick="makeTaskBluePrimary"
+		            android:textAppearance="?android:attr/textAppearanceMedium"/>
+	         
+	         <Button 
+		            android:id="@+id/blue_clear_button"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:layout_marginLeft="8dp"
+		            android:text="@string/clear_button_text"
+		            android:onClick="clearBlue"
+		            android:textAppearance="?android:attr/textAppearanceMedium"/>
+         </LinearLayout>
      </LinearLayout>
 	
     <LinearLayout

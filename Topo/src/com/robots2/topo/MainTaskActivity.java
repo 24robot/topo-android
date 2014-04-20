@@ -58,7 +58,6 @@ public class MainTaskActivity extends ListActivity implements LoaderManager.Load
 		fillData();
 		
 		getLoaderManager().initLoader(10, null, this);
-		// loadRedPrimary();
 	}
 
 	private void fillData() {
@@ -196,10 +195,18 @@ public class MainTaskActivity extends ListActivity implements LoaderManager.Load
 		TextView idTextView = (TextView) redPrimaryTaskSpinner.findViewById(R.id.task_id_spinner);
 		TextView descriptionTextView = (TextView) redPrimaryTaskSpinner.findViewById(R.id.task_description_spinner);
 		
-		String selectionOfTasksWithSameId = "(" + TaskTable.COLUMN_ID + " = " + idTextView.getText() + ")";
-		ContentValues values = new ContentValues();
+		if (!primaryIdTextView.getText().equals("")) {
+			String selectionOfPrimaryTaskId = "(" + TaskTable.COLUMN_ID + " = " + primaryIdTextView.getText() + ")";
+			ContentValues values = new ContentValues();
+			values.put(TaskTable.COLUMN_PRIMARYCOLOR, 0);
+			getContentResolver().update(TaskContentProvider.CONTENT_URI, values, selectionOfPrimaryTaskId, null);
+		}
 		
+		String selectionOfTasksWithSameId = "(" + TaskTable.COLUMN_ID + " = " + idTextView.getText() + ")";
+		
+		ContentValues values = new ContentValues();
 		values.put(TaskTable.COLUMN_PRIMARYCOLOR, 10);
+		
 		getContentResolver().update(TaskContentProvider.CONTENT_URI, values, selectionOfTasksWithSameId, null);
 		
 		primaryIdTextView.setText(idTextView.getText().toString());
@@ -211,6 +218,13 @@ public class MainTaskActivity extends ListActivity implements LoaderManager.Load
 		TextView primaryIdTextView = (TextView) findViewById(R.id.green_primary_task_selected_id);
 		TextView idTextView = (TextView) greenPrimaryTaskSpinner.findViewById(R.id.task_id_spinner);
 		TextView descriptionTextView = (TextView) greenPrimaryTaskSpinner.findViewById(R.id.task_description_spinner);
+		
+		if (!primaryIdTextView.getText().equals("")) {
+			String selectionOfPrimaryTaskId = "(" + TaskTable.COLUMN_ID + " = " + primaryIdTextView.getText() + ")";
+			ContentValues values = new ContentValues();
+			values.put(TaskTable.COLUMN_PRIMARYCOLOR, 0);
+			getContentResolver().update(TaskContentProvider.CONTENT_URI, values, selectionOfPrimaryTaskId, null);
+		}
 		
 		String selectionOfTasksWithSameId = "(" + TaskTable.COLUMN_ID + " = " + idTextView.getText() + ")";
 		ContentValues values = new ContentValues();
@@ -227,6 +241,13 @@ public class MainTaskActivity extends ListActivity implements LoaderManager.Load
 		TextView primaryIdTextView = (TextView) findViewById(R.id.blue_primary_task_selected_id);
 		TextView idTextView = (TextView) bluePrimaryTaskSpinner.findViewById(R.id.task_id_spinner);
 		TextView descriptionTextView = (TextView) bluePrimaryTaskSpinner.findViewById(R.id.task_description_spinner);
+		
+		if (!primaryIdTextView.getText().equals("")) {
+			String selectionOfPrimaryTaskId = "(" + TaskTable.COLUMN_ID + " = " + primaryIdTextView.getText() + ")";
+			ContentValues values = new ContentValues();
+			values.put(TaskTable.COLUMN_PRIMARYCOLOR, 0);
+			getContentResolver().update(TaskContentProvider.CONTENT_URI, values, selectionOfPrimaryTaskId, null);
+		}
 		
 		String selectionOfTasksWithSameId = "(" + TaskTable.COLUMN_ID + " = " + idTextView.getText() + ")";
 		ContentValues values = new ContentValues();
