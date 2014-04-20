@@ -12,6 +12,7 @@
     <string name="primary_tasks">Primary Tasks</string>
     <string name="incomplete_tasks">Incomplete Secondary Tasks</string>
     <string name="add_task">Add Task</string>
+    <string name="update_task">Update Task</string>
     <string name="title_activity_new_task">NewTaskActivity</string>
     <string name="empty">(Empty)</string>
     <string name="red_primary_task">Red Primary Task</string>
@@ -19,6 +20,7 @@
     <string name="blue_primary_task">Blue Primary Task</string>
     <string name="description">Description</string>
     <string name="title_activity_add_task">Add Task</string>
+    <string name="title_activity_update_task">Update Task</string>
     <string name="task_description_placeholder">Description of Task</string>
     <string name="add_parents_text">Add Parents</string>
     <string name="update_parents_text">Update Parents</string>

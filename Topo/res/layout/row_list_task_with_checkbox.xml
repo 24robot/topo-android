@@ -12,8 +12,17 @@
         android:layout_height="16dp"
         android:background="#000000"
         android:id="@+id/task_color"
+        android:layout_marginRight="8dp"
         android:contentDescription="@string/description" />       
     
+	<TextView
+	    android:id="@+id/task_id_with_checkbox"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_marginLeft="8dp"
+	    android:layout_marginRight="8dp"
+	    android:textAppearance="?android:attr/textAppearanceMedium"
+		/>	
     <TextView
         android:id="@+id/task_description_with_checkbox"
         android:layout_width="0dp"
