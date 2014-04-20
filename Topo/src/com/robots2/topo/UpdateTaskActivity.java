@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -23,6 +24,7 @@ public class UpdateTaskActivity extends ListActivity implements LoaderManager.Lo
 
 	private Uri taskUri;
 	private EditText taskDescriptionEditText;
+	private CheckBox completeCheckbox;
 	private String mId;
 	
 	private SimpleCursorAdapter mAdapter;
@@ -32,7 +34,8 @@ public class UpdateTaskActivity extends ListActivity implements LoaderManager.Lo
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_update_task);
 		
-		taskDescriptionEditText = (EditText) findViewById(R.id.updateTaskEditText);
+		completeCheckbox = (CheckBox) findViewById(R.id.complete_checkbox);
+		taskDescriptionEditText = (EditText) findViewById(R.id.update_task_edit_text);
 
 		taskDescriptionEditText.postDelayed(new Runnable() {
            @Override
@@ -79,6 +82,7 @@ public class UpdateTaskActivity extends ListActivity implements LoaderManager.Lo
 	
 	public void onSaveTaskClick(View view) {
 		String taskDescription = taskDescriptionEditText.getText().toString();
+		String selectionOfTasksWithSameId = "(" + TaskTable.COLUMN_ID + " = " + mId + ")";
 		
 		if (taskDescription.length() == 0) {
 			return;
@@ -86,7 +90,12 @@ public class UpdateTaskActivity extends ListActivity implements LoaderManager.Lo
 		
 		ContentValues values = new ContentValues();
 		values.put(TaskTable.COLUMN_DESCRIPTION, taskDescription);
-		getContentResolver().update(TaskContentProvider.CONTENT_URI, values, null, null);
+		
+		if (completeCheckbox.isChecked()) {
+			values.put(TaskTable.COLUMN_COMPLETE, 1);
+		}
+		
+		getContentResolver().update(TaskContentProvider.CONTENT_URI, values, selectionOfTasksWithSameId, null);
 		
 		setResult(RESULT_OK);
 		finish();

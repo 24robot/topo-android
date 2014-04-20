@@ -57,15 +57,13 @@ public class MainTaskActivity extends ListActivity implements LoaderManager.Load
 	@Override
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 		String[] projection = { TaskTable.COLUMN_ID, TaskTable.COLUMN_DESCRIPTION };
-		String selectionOfTasksWithNoParents = "(" + TaskTable.COLUMN_PARENTS + "=" + "0)";
+		String selectionOfTasksWithNoParents = "(" + TaskTable.COLUMN_PARENTS + "= 0 "
+				+ "and " + TaskTable.COLUMN_COMPLETE + " = 0 )";
+		
 		CursorLoader cursorLoader = null;
 		
 		switch (id) {
-			case 0:	
-				cursorLoader = new CursorLoader(this, TaskContentProvider.CONTENT_URI, projection, null, null, null);
-				break;
-				
-			case 1:
+			case 0:
 				cursorLoader = new CursorLoader(this, TaskContentProvider.CONTENT_URI, projection, 
 						selectionOfTasksWithNoParents, null, null);
 				break;

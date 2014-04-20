@@ -8,7 +8,7 @@
     android:layout_marginRight="8dp">
 
     <EditText 
-        android:id="@+id/updateTaskEditText"
+        android:id="@+id/update_task_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -28,6 +28,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"/>
         
         <CheckBox 
+            android:id="@+id/complete_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         
