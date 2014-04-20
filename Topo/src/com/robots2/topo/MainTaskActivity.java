@@ -28,6 +28,14 @@ public class MainTaskActivity extends ListActivity implements LoaderManager.Load
 	private Spinner greenPrimaryTaskSpinner;
 	private Spinner bluePrimaryTaskSpinner;
 	
+	private TextView redPrimaryTaskIdTextView;
+	private TextView greenPrimaryTaskIdTextView;
+	private TextView bluePrimaryTaskIdTextView;
+	
+	private TextView redPrimaryTaskDescriptionTextView;
+	private TextView greenPrimaryTaskDescriptionTextView;
+	private TextView bluePrimaryTaskDescriptionTextView;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -39,9 +47,17 @@ public class MainTaskActivity extends ListActivity implements LoaderManager.Load
 		greenPrimaryTaskSpinner = (Spinner) findViewById(R.id.green_primary_task_spinner);
 		bluePrimaryTaskSpinner = (Spinner) findViewById(R.id.blue_primary_task_spinner);
 		
+		redPrimaryTaskIdTextView = (TextView) findViewById(R.id.red_primary_task_selected_id);
+		greenPrimaryTaskIdTextView = (TextView) findViewById(R.id.green_primary_task_selected_id);
+		bluePrimaryTaskIdTextView = (TextView) findViewById(R.id.blue_primary_task_selected_id);
+		
+		redPrimaryTaskDescriptionTextView = (TextView) findViewById(R.id.red_primary_task_selected_text);
+		greenPrimaryTaskDescriptionTextView = (TextView) findViewById(R.id.green_primary_task_selected_text);
+		bluePrimaryTaskDescriptionTextView = (TextView) findViewById(R.id.blue_primary_task_selected_text);
+		
 		fillData();
 		
-		// getLoaderManager().initLoader(10, null, this);
+		getLoaderManager().initLoader(10, null, this);
 		// loadRedPrimary();
 	}
 
@@ -116,15 +132,40 @@ public class MainTaskActivity extends ListActivity implements LoaderManager.Load
 				mSpinnerAdapter.swapCursor(cursor);
 				break;
 			case 10:
-				if (cursor != null && cursor.getCount() > 0) {
-					String id = cursor.getString(cursor.getColumnIndex(TaskTable.COLUMN_ID));
-				}
+				cursor.moveToFirst();
+				StringBuilder redIdString = new StringBuilder();
+				StringBuilder redDescriptionString = new StringBuilder();
+		        while (!cursor.isAfterLast()) {
+		        	redIdString.append(cursor.getString(cursor.getColumnIndex(TaskTable.COLUMN_ID)));
+		        	redDescriptionString.append(cursor.getString(cursor.getColumnIndex(TaskTable.COLUMN_DESCRIPTION)));
+		            cursor.moveToNext();
+		        }
+		        redPrimaryTaskIdTextView.setText(redIdString);
+		        redPrimaryTaskDescriptionTextView.setText(redDescriptionString);
 				break;
 			case 20:
-
+				cursor.moveToFirst();
+				StringBuilder greenIdString = new StringBuilder();
+				StringBuilder greenDescriptionString = new StringBuilder();
+		        while (!cursor.isAfterLast()) {
+		        	greenIdString.append(cursor.getString(cursor.getColumnIndex(TaskTable.COLUMN_ID)));
+		        	greenDescriptionString.append(cursor.getString(cursor.getColumnIndex(TaskTable.COLUMN_DESCRIPTION)));
+		            cursor.moveToNext();
+		        }
+		        greenPrimaryTaskIdTextView.setText(greenIdString);
+		        greenPrimaryTaskDescriptionTextView.setText(greenDescriptionString);
 				break;
 			case 30:
-
+				cursor.moveToFirst();
+				StringBuilder blueIdString = new StringBuilder();
+				StringBuilder blueDescriptionString = new StringBuilder();
+		        while (!cursor.isAfterLast()) {
+		        	blueIdString.append(cursor.getString(cursor.getColumnIndex(TaskTable.COLUMN_ID)));
+		        	blueDescriptionString.append(cursor.getString(cursor.getColumnIndex(TaskTable.COLUMN_DESCRIPTION)));
+		            cursor.moveToNext();
+		        }
+		        bluePrimaryTaskIdTextView.setText(blueIdString);
+		        bluePrimaryTaskDescriptionTextView.setText(blueDescriptionString);
 				break;
 		}
 	}
@@ -138,9 +179,6 @@ public class MainTaskActivity extends ListActivity implements LoaderManager.Load
 	@Override
 	public void onListItemClick(ListView listView, View view, int position, long id) {
 		super.onListItemClick(listView, view, position, id);
-	
-//		LinearLayout lv = (LinearLayout) listView.getChildAt(position);
-//		TextView tvId = (TextView) lv.getChildAt(1);
 		
 		Uri taskUri = Uri.parse(TaskContentProvider.CONTENT_URI + "/" + String.valueOf(id));
 		
@@ -151,23 +189,21 @@ public class MainTaskActivity extends ListActivity implements LoaderManager.Load
 		
 		startActivity(updateTaskIntent);
 	}
-	
-	public void loadRedPrimary() {
-		TextView primaryTextView = (TextView) findViewById(R.id.red_primary_task_selected_text);
-		TextView primaryIdTextView = (TextView) findViewById(R.id.red_primary_task_selected_id);
-		
-//		primaryTextView.setText(((TextView) redPrimaryTextViewAdapter.getView(0, null, null)).getText());
-//		primaryIdTextView.setText(((TextView) redPrimaryTextViewAdapter.getView(1, null, null)).getText());
-	}
 
 	public void makeTaskRedPrimary(View v) {
+		TextView primaryTextView = (TextView) findViewById(R.id.red_primary_task_selected_text);
+		TextView primaryIdTextView = (TextView) findViewById(R.id.red_primary_task_selected_id);
 		TextView idTextView = (TextView) redPrimaryTaskSpinner.findViewById(R.id.task_id_spinner);
+		TextView descriptionTextView = (TextView) redPrimaryTaskSpinner.findViewById(R.id.task_description_spinner);
 		
 		String selectionOfTasksWithSameId = "(" + TaskTable.COLUMN_ID + " = " + idTextView.getText() + ")";
 		ContentValues values = new ContentValues();
 		
 		values.put(TaskTable.COLUMN_PRIMARYCOLOR, 10);
 		getContentResolver().update(TaskContentProvider.CONTENT_URI, values, selectionOfTasksWithSameId, null);
+		
+		primaryIdTextView.setText(idTextView.getText().toString());
+		primaryTextView.setText(descriptionTextView.getText().toString());
 	}
 	
 	public void makeTaskGreenPrimary(View v) {
