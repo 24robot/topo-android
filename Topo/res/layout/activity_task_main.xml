@@ -7,7 +7,44 @@
     android:background="#CCCCCC"
     >
     
-     <TextView
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/layout_bg"
+        android:orientation="horizontal">
+  
+	    <EditText 
+	        android:id="@+id/newTaskEditText"
+	        android:layout_width="0dp"
+            android:layout_weight="1"
+	        android:layout_height="wrap_content"
+            android:singleLine="true"
+	        android:hint="@string/task_description_placeholder"/>
+        
+	     <View
+                android:layout_height="match_parent"
+                android:layout_width="1dip"
+                android:layout_marginTop="2dip"
+                android:layout_marginBottom="2dip"
+                android:background="?android:attr/dividerVertical"/>
+         
+        <Button
+            android:id="@+id/add_task_button"
+            android:text="@string/add_task"
+            android:onClick="onAddTaskClick"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="?android:attr/selectableItemBackground" />
+
+    </LinearLayout>
+    
+    
+    <TextView
 	     android:id="@+id/primaryTasksTitle"
 	     android:layout_width="wrap_content"
 	     android:layout_height="wrap_content"
@@ -19,294 +56,312 @@
      <LinearLayout
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
-         android:orientation="horizontal"
+         android:orientation="vertical"
          android:layout_marginTop="8dp">
-     
-	     <LinearLayout 
-	         android:layout_width="0dp"
-	         android:layout_height="wrap_content"
-	         android:layout_weight="1"
-	         android:baselineAligned="false"
-	         android:layout_marginLeft="8dp"
-	         android:orientation="vertical"
-	         android:background="@drawable/layout_bg"
-	         >
-	            
-	           <LinearLayout 
-	               android:id="@+id/redPrimaryLayout"
-	               android:layout_width="fill_parent"
-	               android:layout_height="wrap_content"
-	               android:orientation="horizontal"
-	               android:layout_marginLeft="8dp"
-	               >
-	                         
-	               <ImageView 
-	                   android:layout_width="16dp"
-	                   android:layout_height="16dp"
-	                   android:background="@color/android_light_red"
-	                   android:layout_gravity="center_vertical"
-	                   android:contentDescription="@string/description" />         
-	                   
-	                <TextView
-	                   android:id="@+id/red_primary_task_selected_id"
-	                   android:layout_width="wrap_content"
-	                   android:layout_height="wrap_content"
-	                   android:layout_marginLeft="8dp"
-	                   android:textAppearance="?android:attr/textAppearanceMedium" />
-	                
-	               <TextView
-		             android:id="@+id/red_primary_task_selected_text"
-		             android:layout_width="0dp"
-		             android:layout_height="wrap_content"
-		             android:layout_weight="1"
-		             android:hint="@string/empty"
-		             android:layout_marginLeft="8dp"
-		             android:textAppearance="?android:attr/textAppearanceMedium" />
-	                   
-	           </LinearLayout>
-	           
-	            <Spinner 
-		            android:id="@+id/red_primary_task_spinner"
-		            android:layout_width="fill_parent"
-		            android:layout_height="wrap_content"
-		            android:prompt="@string/empty"
-		            android:textAppearance="?android:attr/textAppearanceMedium"/>
-	            
-	            <RelativeLayout
-			        android:layout_width="match_parent"
-			        android:layout_height="48dp"
-			        android:layout_alignParentBottom="true">
-	               
-			        <View
-			            android:id="@+id/redViewColorPickerHelper"
-			            android:layout_width="1dip"
-			            android:layout_height="wrap_content"
-			            android:layout_alignParentTop="true"
-			            android:layout_alignParentBottom="true"
-			            android:layout_marginBottom="4dip"
-			            android:layout_marginTop="4dip"
-			            android:background="?android:attr/dividerVertical" 
-			            android:layout_centerHorizontal="true"/>
-			        <Button
-			            android:id="@+id/red_primary_task_button"
-			            android:layout_width="wrap_content"
-			            android:layout_height="wrap_content"
-			            android:layout_alignParentLeft="true"
-			            android:layout_alignParentTop="true"
-			            android:layout_toLeftOf="@id/redViewColorPickerHelper"
-			            android:background="?android:attr/selectableItemBackground"
-			            android:layout_alignParentBottom="true"
-			            android:text="@string/primary_button_text"
-			            android:onClick="makeTaskRedPrimary"/>
-			        <Button
-			            android:id="@+id/red_clear_button"
-			            android:text="@string/clear_button_text"
-			            android:onClick="clearRed"
-			            android:layout_width="wrap_content"
-			            android:layout_height="match_parent"
-			            android:layout_alignParentRight="true"
-			            android:layout_alignParentTop="true"
-			            android:background="?android:attr/selectableItemBackground" 
-			            android:layout_alignParentBottom="true" 
-			            android:layout_toRightOf="@id/redViewColorPickerHelper"/>
-			    </RelativeLayout>
+          
+          <LinearLayout 
+		   	  android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:baselineAligned="false"
+              >
+              
+              <LinearLayout
+                   android:id="@+id/redPrimaryLayout"
+                   android:layout_width="0dp"
+                   android:layout_weight="1"
+                   android:layout_height="64dp"
+                   android:layout_marginLeft="4dp"
+                   android:layout_marginRight="4dp"
+                   android:background="@drawable/layout_bg"
+                   android:onClick="onRedPrimaryClick"
+                   android:orientation="horizontal">
+                   
+                   <ImageView 
+                       android:layout_width="16dp"
+                       android:layout_height="16dp"
+                       android:layout_marginLeft="8dp"
+                       android:background="@color/android_light_red"
+                       android:layout_gravity="center_vertical"
+                       android:contentDescription="@string/description" />         
+                       
+                    <TextView
+                       android:id="@+id/red_primary_task_selected_id"
+                       android:layout_width="0dp"
+                       android:layout_height="0dp"
+                       android:layout_marginLeft="8dp"
+                       android:textAppearance="?android:attr/textAppearanceMedium" />
+                    
+                   <TextView
+    	             android:id="@+id/red_primary_task_selected_text"
+    	             android:layout_width="0dp"
+    	             android:layout_height="wrap_content"
+    	             android:layout_weight="1"
+    	             android:hint="@string/empty"
+    	             android:layout_marginLeft="8dp"
+    	             android:textAppearance="?android:attr/textAppearanceMedium" />
+                   
+                   <View
+                        android:layout_height="match_parent"
+                        android:layout_width="1dip"
+                        android:layout_marginTop="2dip"
+                        android:layout_marginBottom="2dip"
+                        android:background="?android:attr/dividerVertical" />
+                   
+                   <Button
+                        android:id="@+id/red_clear_button"
+                        android:text="@string/clear_button_text"
+                        android:onClick="clearRed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        android:background="?android:attr/selectableItemBackground"  />
+                  
+          		</LinearLayout>
 
+               <LinearLayout 
+                   android:layout_width="0dp"
+                   android:layout_weight="1"
+                   android:layout_height="64dp"
+                   android:layout_marginRight="4dp"
+                   android:orientation="horizontal"
+                   android:background="@drawable/layout_bg"
+                   >
+    	            <Spinner 
+    		            android:id="@+id/red_primary_task_spinner"
+    		            android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_gravity="center_vertical"
+    		            android:layout_height="wrap_content"/>
+    	            
+    	                <View
+    			            android:layout_height="match_parent"
+    			            android:layout_width="1dip"
+    			            android:layout_marginLeft="2dip"
+    			            android:layout_marginRight="2dip"
+    			            android:background="?android:attr/dividerVertical"/>
+    	                
+                   		 <Button
+    			            android:id="@+id/red_primary_task_button"
+    			            android:layout_width="wrap_content"
+    			            android:layout_height="wrap_content"
+    			            android:background="?android:attr/selectableItemBackground"
+    			            android:text="@string/primary_button_text"
+                            android:layout_marginLeft="4dip"
+                            android:layout_marginRight="4dip"
+    			            android:onClick="makeTaskRedPrimary"/>
+    
+    			</LinearLayout>
 		</LinearLayout>
+        
+          
+          <LinearLayout 
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:baselineAligned="false"
+              >
+              
+              <LinearLayout
+                   android:id="@+id/greenPrimaryLayout"
+                   android:layout_width="0dp"
+                   android:layout_weight="1"
+                   android:layout_height="64dp"
+                   android:layout_marginLeft="4dp"
+                   android:layout_marginRight="4dp"
+                   android:background="@drawable/layout_bg"
+                   android:onClick="onGreenPrimaryClick"
+                   android:orientation="horizontal">
+                   
+                   <ImageView 
+                       android:layout_width="16dp"
+                       android:layout_height="16dp"
+                       android:layout_marginLeft="8dp"
+                       android:background="@color/android_light_green"
+                       android:layout_gravity="center_vertical"
+                       android:contentDescription="@string/description" />         
+                       
+                    <TextView
+                       android:id="@+id/green_primary_task_selected_id"
+                       android:layout_width="0dp"
+                       android:layout_height="0dp"
+                       android:layout_marginLeft="8dp"
+                       android:textAppearance="?android:attr/textAppearanceMedium" />
+                    
+                   <TextView
+                     android:id="@+id/green_primary_task_selected_text"
+                     android:layout_width="0dp"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:hint="@string/empty"
+                     android:layout_marginLeft="8dp"
+                     android:textAppearance="?android:attr/textAppearanceMedium" />
+                   
+                   <View
+                        android:layout_height="match_parent"
+                        android:layout_width="1dip"
+                        android:layout_marginTop="2dip"
+                        android:layout_marginBottom="2dip"
+                        android:background="?android:attr/dividerVertical" />
+                   
+                   <Button
+                        android:id="@+id/green_clear_button"
+                        android:text="@string/clear_button_text"
+                        android:onClick="clearGreen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        android:background="?android:attr/selectableItemBackground"  />
+                  
+                </LinearLayout>
+
+               <LinearLayout 
+                   android:layout_width="0dp"
+                   android:layout_weight="1"
+                   android:layout_height="64dp"
+                   android:layout_marginRight="4dp"
+                   android:orientation="horizontal"
+                   android:background="@drawable/layout_bg"
+                   >
+                    <Spinner 
+                        android:id="@+id/green_primary_task_spinner"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_gravity="center_vertical"
+                        android:layout_height="wrap_content"/>
+                    
+                        <View
+                            android:layout_height="match_parent"
+                            android:layout_width="1dip"
+                            android:layout_marginLeft="2dip"
+                            android:layout_marginRight="2dip"
+                            android:background="?android:attr/dividerVertical"/>
+                        
+                         <Button
+                            android:id="@+id/green_primary_task_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="?android:attr/selectableItemBackground"
+                            android:text="@string/primary_button_text"
+                            android:layout_marginLeft="4dip"
+                            android:layout_marginRight="4dip"
+                            android:onClick="makeTaskGreenPrimary"/>
+    
+                </LinearLayout>
+        </LinearLayout>
+        
+          
+          <LinearLayout 
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:baselineAligned="false"
+              >
+              
+              <LinearLayout
+                   android:id="@+id/bluePrimaryLayout"
+                   android:layout_width="0dp"
+                   android:layout_weight="1"
+                   android:layout_height="64dp"
+                   android:layout_marginLeft="4dp"
+                   android:layout_marginRight="4dp"
+                   android:background="@drawable/layout_bg"
+                   android:onClick="onBluePrimaryClick"
+                   android:orientation="horizontal">
+                   
+                   <ImageView 
+                       android:layout_width="16dp"
+                       android:layout_height="16dp"
+                       android:layout_marginLeft="8dp"
+                       android:background="@color/android_light_blue"
+                       android:layout_gravity="center_vertical"
+                       android:contentDescription="@string/description" />         
+                       
+                    <TextView
+                       android:id="@+id/blue_primary_task_selected_id"
+                       android:layout_width="0dp"
+                       android:layout_height="0dp"
+                       android:layout_marginLeft="8dp"
+                       android:textAppearance="?android:attr/textAppearanceMedium" />
+                    
+                   <TextView
+                     android:id="@+id/blue_primary_task_selected_text"
+                     android:layout_width="0dp"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:hint="@string/empty"
+                     android:layout_marginLeft="8dp"
+                     android:textAppearance="?android:attr/textAppearanceMedium" />
+                   
+                   <View
+                        android:layout_height="match_parent"
+                        android:layout_width="1dip"
+                        android:layout_marginTop="2dip"
+                        android:layout_marginBottom="2dip"
+                        android:background="?android:attr/dividerVertical" />
+                   
+                   <Button
+                        android:id="@+id/blue_clear_button"
+                        android:text="@string/clear_button_text"
+                        android:onClick="clearBlue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        android:background="?android:attr/selectableItemBackground"  />
+                  
+                </LinearLayout>
+
+               <LinearLayout 
+                   android:layout_width="0dp"
+                   android:layout_weight="1"
+                   android:layout_height="64dp"
+                   android:layout_marginRight="4dp"
+                   android:orientation="horizontal"
+                   android:background="@drawable/layout_bg"
+                   >
+                    <Spinner 
+                        android:id="@+id/blue_primary_task_spinner"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_gravity="center_vertical"
+                        android:layout_height="wrap_content"/>
+                    
+                        <View
+                            android:layout_height="match_parent"
+                            android:layout_width="1dip"
+                            android:layout_marginLeft="2dip"
+                            android:layout_marginRight="2dip"
+                            android:background="?android:attr/dividerVertical"/>
+                        
+                         <Button
+                            android:id="@+id/blue_primary_task_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="?android:attr/selectableItemBackground"
+                            android:text="@string/primary_button_text"
+                            android:layout_marginLeft="4dip"
+                            android:layout_marginRight="4dip"
+                            android:onClick="makeTaskBluePrimary"/>
+    
+                </LinearLayout>
+        </LinearLayout>
 	
-	     <LinearLayout 
-	         android:layout_width="0dp"
-	         android:layout_height="wrap_content"
-	         android:layout_weight="1"
-	         android:baselineAligned="false"
-	         android:layout_marginLeft="8dp"
-	         android:layout_marginRight="8dp"
-	         android:orientation="vertical"
-	         android:background="@drawable/layout_bg"
-	         >
-	            
-	           <LinearLayout 
-	               android:id="@+id/greenPrimaryLayout"
-	               android:layout_width="fill_parent"
-	               android:layout_height="wrap_content"
-	               android:orientation="horizontal"
-	               android:layout_marginLeft="8dp"
-	               >
-	                         
-	               <ImageView 
-	                   android:layout_width="16dp"
-	                   android:layout_height="16dp"
-	                   android:background="@color/android_light_green"
-	                   android:layout_gravity="center_vertical"
-	                   android:contentDescription="@string/description" />         
-	                   
-	                <TextView
-	                   android:id="@+id/green_primary_task_selected_id"
-	                   android:layout_width="wrap_content"
-	                   android:layout_height="wrap_content"
-	                   android:layout_marginLeft="8dp"
-	                   android:textAppearance="?android:attr/textAppearanceMedium" />
-	                
-	               <TextView
-		             android:id="@+id/green_primary_task_selected_text"
-		             android:layout_width="0dp"
-		             android:layout_height="wrap_content"
-		             android:layout_weight="1"
-		             android:hint="@string/empty"
-		             android:layout_marginLeft="8dp"
-		             android:textAppearance="?android:attr/textAppearanceMedium" />
-	                   
-	           </LinearLayout>
-	           
-	            <Spinner 
-		            android:id="@+id/green_primary_task_spinner"
-		            android:layout_width="fill_parent"
-		            android:layout_height="wrap_content"
-		            android:prompt="@string/empty"
-		            android:textAppearance="?android:attr/textAppearanceMedium"/>
-	            
-	            <RelativeLayout
-			        android:layout_width="match_parent"
-			        android:layout_height="48dp"
-			        android:layout_alignParentBottom="true">
-	               
-
-			        <View
-			            android:id="@+id/greenViewColorPickerHelper"
-			            android:layout_width="1dip"
-			            android:layout_height="wrap_content"
-			            android:layout_alignParentTop="true"
-			            android:layout_alignParentBottom="true"
-			            android:layout_marginBottom="4dip"
-			            android:layout_marginTop="4dip"
-			            android:background="?android:attr/dividerVertical" 
-			            android:layout_centerHorizontal="true"/>
-			        <Button
-			            android:id="@+id/green_primary_task_button"
-			            android:layout_width="wrap_content"
-			            android:layout_height="wrap_content"
-			            android:layout_alignParentLeft="true"
-			            android:layout_alignParentTop="true"
-			            android:layout_toLeftOf="@id/greenViewColorPickerHelper"
-			            android:background="?android:attr/selectableItemBackground"
-			            android:layout_alignParentBottom="true"
-			            android:text="@string/primary_button_text"
-			            android:onClick="makeTaskGreenPrimary"/>
-			        <Button
-			            android:id="@+id/green_clear_button"
-			            android:text="@string/clear_button_text"
-			            android:onClick="clearGreen"
-			            android:layout_width="wrap_content"
-			            android:layout_height="match_parent"
-			            android:layout_alignParentRight="true"
-			            android:layout_alignParentTop="true"
-			            android:background="?android:attr/selectableItemBackground" 
-			            android:layout_alignParentBottom="true" 
-			            android:layout_toRightOf="@id/greenViewColorPickerHelper"/>
-			    </RelativeLayout>
-	          	
-		</LinearLayout>
 		
-	     <LinearLayout 
-	         android:layout_width="0dp"
-	         android:layout_height="wrap_content"
-	         android:layout_weight="1"
-	         android:baselineAligned="false"
-	         android:layout_marginRight="8dp"
-	         android:orientation="vertical"
-	         android:background="@drawable/layout_bg"
-	         >
-	            
-	           <LinearLayout 
-	               android:id="@+id/bluePrimaryLayout"
-	               android:layout_width="fill_parent"
-	               android:layout_height="wrap_content"
-	               android:orientation="horizontal"
-	               android:layout_marginLeft="8dp"
-	               >
-	                         
-	               <ImageView 
-	                   android:layout_width="16dp"
-	                   android:layout_height="16dp"
-	                   android:background="@color/android_light_blue"
-	                   android:layout_gravity="center_vertical"
-	                   android:contentDescription="@string/description" />         
-	                   
-	                <TextView
-	                   android:id="@+id/blue_primary_task_selected_id"
-	                   android:layout_width="wrap_content"
-	                   android:layout_height="wrap_content"
-	                   android:layout_marginLeft="8dp"
-	                   android:textAppearance="?android:attr/textAppearanceMedium" />
-	                
-	               <TextView
-		             android:id="@+id/blue_primary_task_selected_text"
-		             android:layout_width="0dp"
-		             android:layout_height="wrap_content"
-		             android:layout_weight="1"
-		             android:hint="@string/empty"
-		             android:layout_marginLeft="8dp"
-		             android:textAppearance="?android:attr/textAppearanceMedium" />
-	                   
-	           </LinearLayout>
-	           
-	            <Spinner 
-		            android:id="@+id/blue_primary_task_spinner"
-		            android:layout_width="fill_parent"
-		            android:layout_height="wrap_content"
-		            android:prompt="@string/empty"
-		            android:textAppearance="?android:attr/textAppearanceMedium"/>
-	            
-	            <RelativeLayout
-			        android:layout_width="match_parent"
-			        android:layout_height="48dp"
-			        android:layout_alignParentBottom="true">
-	               
-			        <View
-			            android:id="@+id/blueViewColorPickerHelper"
-			            android:layout_width="1dip"
-			            android:layout_height="wrap_content"
-			            android:layout_alignParentTop="true"
-			            android:layout_alignParentBottom="true"
-			            android:layout_marginBottom="4dip"
-			            android:layout_marginTop="4dip"
-			            android:background="?android:attr/dividerVertical" 
-			            android:layout_centerHorizontal="true"/>
-			        <Button
-			            android:id="@+id/blue_primary_task_button"
-			            android:layout_width="wrap_content"
-			            android:layout_height="wrap_content"
-			            android:layout_alignParentLeft="true"
-			            android:layout_alignParentTop="true"
-			            android:layout_toLeftOf="@id/blueViewColorPickerHelper"
-			            android:background="?android:attr/selectableItemBackground"
-			            android:layout_alignParentBottom="true"
-			            android:text="@string/primary_button_text"
-			            android:onClick="makeTaskBluePrimary"/>
-			        <Button
-			            android:id="@+id/blue_clear_button"
-			            android:text="@string/clear_button_text"
-			            android:onClick="clearBlue"
-			            android:layout_width="wrap_content"
-			            android:layout_height="match_parent"
-			            android:layout_alignParentRight="true"
-			            android:layout_alignParentTop="true"
-			            android:background="?android:attr/selectableItemBackground" 
-			            android:layout_alignParentBottom="true" 
-			            android:layout_toRightOf="@id/blueViewColorPickerHelper"/>
-			    </RelativeLayout>
-	          	
-		</LinearLayout>
+		
     </LinearLayout>
     
-     <TextView
-         android:id="@+id/incompleteTasksTitle"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_marginTop="24dp"
-         android:layout_marginLeft="8dp"
-         android:text="@string/incomplete_tasks"
-         android:textAppearance="?android:attr/textAppearanceLarge" />
-    
+    <TextView
+        android:id="@+id/incompleteTasksTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginLeft="8dp"
+        android:text="@string/secondary_tasks"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+     
 	<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -322,7 +377,7 @@
 	        android:id="@android:id/list"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
-	        tools:listitem="@layout/row_list_to_do" 
+	        tools:listitem="@layout/row_list_task" 
 	        android:layout_marginLeft="8dp"/>
 	
     </LinearLayout>

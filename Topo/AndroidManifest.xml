@@ -24,24 +24,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.robots2.topo.NewTaskActivity"
-            android:label="@string/title_activity_add_task"
-            android:parentActivityName="com.robots2.topo.MainTaskActivity" 
-            android:launchMode="singleTask" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.robots2.topo.MainTaskActivity" />
-        </activity>
-        <activity
-            android:name="com.robots2.topo.UpdateTaskActivity"
-            android:label="@string/title_activity_update_task"
-            android:parentActivityName="com.robots2.topo.MainTaskActivity" 
-            android:launchMode="singleTask" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.robots2.topo.MainTaskActivity" />
-        </activity>
-        <activity
             android:name="com.robots2.topo.CompletedTasksActivity"
             android:label="@string/title_activity_completed_tasks"
             android:parentActivityName="com.robots2.topo.MainTaskActivity"

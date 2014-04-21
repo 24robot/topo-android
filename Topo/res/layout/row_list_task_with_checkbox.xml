@@ -7,14 +7,6 @@
     android:paddingLeft="8dp"
     android:paddingBottom="8dp">
     
-	<ImageView 
-        android:layout_width="16dp"
-        android:layout_height="16dp"
-        android:background="#000000"
-        android:id="@+id/task_color"
-        android:layout_marginRight="8dp"
-        android:contentDescription="@string/description" />       
-    
 	<TextView
 	    android:id="@+id/task_id_with_checkbox"
 	    android:layout_width="wrap_content"
@@ -36,5 +28,6 @@
     <CheckBox 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
         />
 </LinearLayout>
