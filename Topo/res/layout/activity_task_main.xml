@@ -96,7 +96,7 @@
 			            android:layout_toLeftOf="@id/redViewColorPickerHelper"
 			            android:background="?android:attr/selectableItemBackground"
 			            android:layout_alignParentBottom="true"
-			            android:text="@string/add_button_text"
+			            android:text="@string/primary_button_text"
 			            android:onClick="makeTaskRedPrimary"/>
 			        <Button
 			            android:id="@+id/red_clear_button"
@@ -189,7 +189,7 @@
 			            android:layout_toLeftOf="@id/greenViewColorPickerHelper"
 			            android:background="?android:attr/selectableItemBackground"
 			            android:layout_alignParentBottom="true"
-			            android:text="@string/add_button_text"
+			            android:text="@string/primary_button_text"
 			            android:onClick="makeTaskGreenPrimary"/>
 			        <Button
 			            android:id="@+id/green_clear_button"
@@ -280,7 +280,7 @@
 			            android:layout_toLeftOf="@id/blueViewColorPickerHelper"
 			            android:background="?android:attr/selectableItemBackground"
 			            android:layout_alignParentBottom="true"
-			            android:text="@string/add_button_text"
+			            android:text="@string/primary_button_text"
 			            android:onClick="makeTaskBluePrimary"/>
 			        <Button
 			            android:id="@+id/blue_clear_button"
