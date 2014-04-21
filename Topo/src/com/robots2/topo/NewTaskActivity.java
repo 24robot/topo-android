@@ -93,25 +93,13 @@ public class NewTaskActivity extends ListActivity implements LoaderManager.Loade
 //		        
 //		    }
 //		}
-		
+		saveState();
 		setResult(RESULT_OK);
 		finish();
 	}
 	
 	public void onCancelAddTaskClick(View view) {
 		this.onBackPressed();
-	}
-	
-	protected void onSaveInstanceState (Bundle outState) {
-		super.onSaveInstanceState(outState);
-		saveState();
-		outState.putParcelable(TaskContentProvider.CONTENT_ITEM_TYPE, taskUri);
-	}
-	
-	@Override
-	protected void onPause() {
-		super.onPause();
-		saveState();
 	}
 	
 	private void saveState() {

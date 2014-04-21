@@ -77,13 +77,6 @@
 			        android:layout_height="48dp"
 			        android:layout_alignParentBottom="true">
 	               
-	                <View
-			            android:layout_width="match_parent"
-			            android:layout_height="1dip"
-			            android:layout_marginLeft="4dip"
-			            android:layout_marginRight="4dip"
-			            android:background="?android:attr/dividerVertical"
-			            android:layout_alignParentTop="true"/>
 			        <View
 			            android:id="@+id/redViewColorPickerHelper"
 			            android:layout_width="1dip"
@@ -176,13 +169,7 @@
 			        android:layout_height="48dp"
 			        android:layout_alignParentBottom="true">
 	               
-	                <View
-			            android:layout_width="match_parent"
-			            android:layout_height="1dip"
-			            android:layout_marginLeft="4dip"
-			            android:layout_marginRight="4dip"
-			            android:background="?android:attr/dividerVertical"
-			            android:layout_alignParentTop="true"/>
+
 			        <View
 			            android:id="@+id/greenViewColorPickerHelper"
 			            android:layout_width="1dip"
@@ -274,13 +261,6 @@
 			        android:layout_height="48dp"
 			        android:layout_alignParentBottom="true">
 	               
-	                <View
-			            android:layout_width="match_parent"
-			            android:layout_height="1dip"
-			            android:layout_marginLeft="4dip"
-			            android:layout_marginRight="4dip"
-			            android:background="?android:attr/dividerVertical"
-			            android:layout_alignParentTop="true"/>
 			        <View
 			            android:id="@+id/blueViewColorPickerHelper"
 			            android:layout_width="1dip"
@@ -333,6 +313,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
         android:orientation="vertical"
         android:background="@drawable/layout_bg"
         >
