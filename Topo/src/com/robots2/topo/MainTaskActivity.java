@@ -83,6 +83,8 @@ public class MainTaskActivity extends ListActivity implements LoaderManager.Load
 		fillData();
 		
 		getLoaderManager().initLoader(10, null, this);
+		getLoaderManager().initLoader(20, null, this);
+		getLoaderManager().initLoader(30, null, this);
 	}
 
 	private void fillData() {
