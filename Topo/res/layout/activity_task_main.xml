@@ -76,7 +76,7 @@
                    android:layout_marginLeft="4dp"
                    android:layout_marginRight="4dp"
                    android:background="@drawable/layout_bg"
-                   android:onClick="onRedPrimaryClick"
+                   android:onClick="onPrimaryTaskClick"
                    android:orientation="horizontal">
                    
                    <ImageView 
@@ -112,7 +112,7 @@
                    <Button
                         android:id="@+id/red_clear_button"
                         android:text="@string/clear_button_text"
-                        android:onClick="clearRed"
+                        android:onClick="clearPrimaryTask"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:background="?android:attr/selectableItemBackground"  />
@@ -147,7 +147,7 @@
     			            android:layout_height="wrap_content"
     			            android:background="?android:attr/selectableItemBackground"
     			            android:text="@string/primary_button_text"
-    			            android:onClick="makeTaskRedPrimary"/>
+    			            android:onClick="makeTaskPrimary"/>
     
     			</LinearLayout>
 		</LinearLayout>
@@ -168,7 +168,7 @@
                    android:layout_marginLeft="4dp"
                    android:layout_marginRight="4dp"
                    android:background="@drawable/layout_bg"
-                   android:onClick="onGreenPrimaryClick"
+                   android:onClick="onPrimaryTaskClick"
                    android:orientation="horizontal">
                    
                    <ImageView 
@@ -204,7 +204,7 @@
                    <Button
                         android:id="@+id/green_clear_button"
                         android:text="@string/clear_button_text"
-                        android:onClick="clearGreen"
+                        android:onClick="clearPrimaryTask"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:background="?android:attr/selectableItemBackground"  />
@@ -239,7 +239,7 @@
                             android:layout_height="wrap_content"
                             android:background="?android:attr/selectableItemBackground"
                             android:text="@string/primary_button_text"
-                            android:onClick="makeTaskGreenPrimary"/>
+                            android:onClick="makeTaskPrimary"/>
     
                 </LinearLayout>
         </LinearLayout>
@@ -260,7 +260,7 @@
                    android:layout_marginLeft="4dp"
                    android:layout_marginRight="4dp"
                    android:background="@drawable/layout_bg"
-                   android:onClick="onBluePrimaryClick"
+                   android:onClick="onPrimaryTaskClick"
                    android:orientation="horizontal">
                    
                    <ImageView 
@@ -296,7 +296,7 @@
                    <Button
                         android:id="@+id/blue_clear_button"
                         android:text="@string/clear_button_text"
-                        android:onClick="clearBlue"
+                        android:onClick="clearPrimaryTask"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:background="?android:attr/selectableItemBackground"  />
@@ -331,7 +331,7 @@
                             android:layout_height="wrap_content"
                             android:background="?android:attr/selectableItemBackground"
                             android:text="@string/primary_button_text"
-                            android:onClick="makeTaskBluePrimary"/>
+                            android:onClick="makeTaskPrimary"/>
     
                 </LinearLayout>
         </LinearLayout>
