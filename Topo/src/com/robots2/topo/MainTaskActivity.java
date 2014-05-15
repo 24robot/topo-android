@@ -461,7 +461,6 @@ public class MainTaskActivity extends ListActivity implements LoaderManager.Load
 		switch(id) {
 			case (R.id.action_completed_tasks):
 				Intent showCompletedTasksIntent = new Intent(this, CompletedTasksActivity.class);
-				showCompletedTasksIntent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 				startActivity(showCompletedTasksIntent);
 				break;
 
