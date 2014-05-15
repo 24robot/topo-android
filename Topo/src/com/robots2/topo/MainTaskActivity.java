@@ -1,11 +1,13 @@
 package com.robots2.topo;
 
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.app.ListActivity;
 import android.app.LoaderManager;
 import android.content.ContentValues;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
@@ -19,7 +21,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.robots2.topo.contentprovider.TaskContentProvider;
@@ -30,9 +31,11 @@ public class MainTaskActivity extends ListActivity implements LoaderManager.Load
 	private SimpleCursorAdapter mAdapter;
 	private SimpleCursorAdapter mSpinnerAdapter;
 	
+	/*
 	private Spinner redPrimaryTaskSpinner;
 	private Spinner greenPrimaryTaskSpinner;
 	private Spinner bluePrimaryTaskSpinner;
+	*/
 	
 	private TextView redPrimaryTaskIdTextView;
 	private TextView greenPrimaryTaskIdTextView;
@@ -72,9 +75,11 @@ public class MainTaskActivity extends ListActivity implements LoaderManager.Load
 		    }
 		});
 
+		/*
 		redPrimaryTaskSpinner = (Spinner) findViewById(R.id.red_primary_task_spinner);
 		greenPrimaryTaskSpinner = (Spinner) findViewById(R.id.green_primary_task_spinner);
 		bluePrimaryTaskSpinner = (Spinner) findViewById(R.id.blue_primary_task_spinner);
+		*/
 		
 		redPrimaryTaskIdTextView = (TextView) findViewById(R.id.red_primary_task_selected_id);
 		greenPrimaryTaskIdTextView = (TextView) findViewById(R.id.green_primary_task_selected_id);
@@ -138,10 +143,11 @@ public class MainTaskActivity extends ListActivity implements LoaderManager.Load
 		mSpinnerAdapter = new SimpleCursorAdapter(this, R.layout.row_spinner_task, null,
 				mFromColumnForSpinner, mToFieldsForSpinner, 0);
 		
+		/*
 		redPrimaryTaskSpinner.setAdapter(mSpinnerAdapter);
 		greenPrimaryTaskSpinner.setAdapter(mSpinnerAdapter);
 		bluePrimaryTaskSpinner.setAdapter(mSpinnerAdapter);
-		
+		*/
 	}
 	
 	@Override
@@ -327,13 +333,35 @@ public class MainTaskActivity extends ListActivity implements LoaderManager.Load
 		}
 	}
 	
+	public void choosePrimaryTask(View view) {
+		AlertDialog.Builder b = new Builder(this);
+	    b.setTitle("Example");
+	    String[] types = {"By Zip", "By Category"};
+	    b.setItems(types, new OnClickListener() {
+
+	        @Override
+	        public void onClick(DialogInterface dialog, int which) {
+
+	            dialog.dismiss();
+	            switch(which){
+	            case 0:
+	                break;
+	            case 1:
+	                break;
+	            }
+	        }
+
+	    });
+
+	    b.show();
+	}
+	/*
 	public void makeTaskPrimary(View view) {
 		TextView primaryTextView = (TextView) findViewById(R.id.red_primary_task_selected_text);
 		TextView primaryIdTextView = (TextView) findViewById(R.id.red_primary_task_selected_id);
 		TextView idTextView = (TextView) redPrimaryTaskSpinner.findViewById(R.id.task_id_spinner);
 		TextView descriptionTextView = (TextView) redPrimaryTaskSpinner.findViewById(R.id.task_description_spinner);
 		String color_id = red_color_id;
-		
 
 		if (view.getId() == R.id.green_primary_task_button) {
 			primaryTextView = (TextView) findViewById(R.id.green_primary_task_selected_text);
@@ -349,7 +377,6 @@ public class MainTaskActivity extends ListActivity implements LoaderManager.Load
 			descriptionTextView = (TextView) bluePrimaryTaskSpinner.findViewById(R.id.task_description_spinner);
 			color_id = blue_color_id;
 		}
-		
 		
 		if (idTextView != null) {
 			if (!primaryIdTextView.getText().equals("")) {
@@ -369,7 +396,7 @@ public class MainTaskActivity extends ListActivity implements LoaderManager.Load
 			primaryIdTextView.setText(idTextView.getText().toString());
 			primaryTextView.setText(descriptionTextView.getText().toString());
 		}
-	}
+	} */
 	
 	public void clearPrimaryTask(View view) {
 		TextView primaryTextView = (TextView) findViewById(R.id.red_primary_task_selected_text);
