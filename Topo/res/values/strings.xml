@@ -8,8 +8,8 @@
     <string name="add_button_text">Add</string>
     <string name="primary_button_text">Set</string>
     <string name="clear_button_text">Clear</string>
-    <string name="choose_button_text">Choose another</string>
-    <string name="complete_button_text">Task completed</string>
+    <string name="choose_button_text">Swap</string>
+    <string name="complete_button_text">Completed</string>
     <string name="menu_refresh">Refresh</string>
     <string name="checkbox_text">Task</string>
     <string name="tasks">Tasks</string>

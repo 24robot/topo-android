@@ -19,6 +19,7 @@ public class CompletedTasksActivity extends ListActivity implements LoaderManage
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_completed_tasks);
+		overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
 		
 		getLoaderManager().initLoader(0, null, this);
 		fillData();
@@ -32,6 +33,12 @@ public class CompletedTasksActivity extends ListActivity implements LoaderManage
 		mAdapter = new SimpleCursorAdapter(this, R.layout.row_list_task, null, mFromColumns, mToFields, 0);
 
 		mListView.setAdapter(mAdapter);
+	}
+	
+	@Override
+	public void onBackPressed() {
+	    super.onBackPressed();
+	    overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
 	}
 	
 	@Override
