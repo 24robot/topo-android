@@ -7,17 +7,19 @@ import android.app.LoaderManager;
 import android.content.ContentValues;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -31,12 +33,6 @@ public class MainTaskActivity extends ListActivity implements LoaderManager.Load
 	private SimpleCursorAdapter mAdapter;
 	private SimpleCursorAdapter mSpinnerAdapter;
 	
-	/*
-	private Spinner redPrimaryTaskSpinner;
-	private Spinner greenPrimaryTaskSpinner;
-	private Spinner bluePrimaryTaskSpinner;
-	*/
-	
 	private TextView redPrimaryTaskIdTextView;
 	private TextView greenPrimaryTaskIdTextView;
 	private TextView bluePrimaryTaskIdTextView;
@@ -44,6 +40,10 @@ public class MainTaskActivity extends ListActivity implements LoaderManager.Load
 	private TextView redPrimaryTaskDescriptionTextView;
 	private TextView greenPrimaryTaskDescriptionTextView;
 	private TextView bluePrimaryTaskDescriptionTextView;
+	
+	private Button redChooseButton;
+	private Button greenChooseButton;
+	private Button blueChooseButton;
 	
 	private String red_color_id;
 	private String blue_color_id;
@@ -65,7 +65,6 @@ public class MainTaskActivity extends ListActivity implements LoaderManager.Load
 	
 		taskDescriptionEditText.setOnKeyListener(new View.OnKeyListener() {
 		    public boolean onKey(View v, int keyCode, KeyEvent event) {
-		        // If the event is a key-down event on the "enter" button
 		        if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
 		            (keyCode == KeyEvent.KEYCODE_ENTER)) {
 		        	addTask();
@@ -74,20 +73,66 @@ public class MainTaskActivity extends ListActivity implements LoaderManager.Load
 		        return false;
 		    }
 		});
-
-		/*
-		redPrimaryTaskSpinner = (Spinner) findViewById(R.id.red_primary_task_spinner);
-		greenPrimaryTaskSpinner = (Spinner) findViewById(R.id.green_primary_task_spinner);
-		bluePrimaryTaskSpinner = (Spinner) findViewById(R.id.blue_primary_task_spinner);
-		*/
 		
 		redPrimaryTaskIdTextView = (TextView) findViewById(R.id.red_primary_task_selected_id);
 		greenPrimaryTaskIdTextView = (TextView) findViewById(R.id.green_primary_task_selected_id);
 		bluePrimaryTaskIdTextView = (TextView) findViewById(R.id.blue_primary_task_selected_id);
 		
+		redChooseButton = (Button) findViewById(R.id.red_choose_button);
+		greenChooseButton = (Button) findViewById(R.id.green_choose_button);
+		blueChooseButton = (Button) findViewById(R.id.blue_choose_button);
+		
 		redPrimaryTaskDescriptionTextView = (TextView) findViewById(R.id.red_primary_task_selected_text);
 		greenPrimaryTaskDescriptionTextView = (TextView) findViewById(R.id.green_primary_task_selected_text);
 		bluePrimaryTaskDescriptionTextView = (TextView) findViewById(R.id.blue_primary_task_selected_text);
+		
+		redPrimaryTaskDescriptionTextView.addTextChangedListener(new TextWatcher() {
+
+			   public void afterTextChanged(Editable s) {}
+
+			   public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+			   public void onTextChanged(CharSequence s, int start, int before, int count) {
+			      if(s.length() != 0) {
+			    	  redChooseButton.setText(getResources().getString(R.string.swap_button_text));
+			      }
+			      else {
+			    	  redChooseButton.setText(getResources().getString(R.string.add_button_text));
+			      }
+			   }
+		  });
+		
+		greenPrimaryTaskDescriptionTextView.addTextChangedListener(new TextWatcher() {
+
+			   public void afterTextChanged(Editable s) {}
+
+			   public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+			   public void onTextChanged(CharSequence s, int start, int before, int count) {
+			      if(s.length() != 0) {
+			    	  greenChooseButton.setText(getResources().getString(R.string.swap_button_text));
+			      }
+			      else {
+			    	  greenChooseButton.setText(getResources().getString(R.string.add_button_text));
+			      }
+			   }
+		  });
+		
+		bluePrimaryTaskDescriptionTextView.addTextChangedListener(new TextWatcher() {
+
+			   public void afterTextChanged(Editable s) {}
+
+			   public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+			   public void onTextChanged(CharSequence s, int start, int before, int count) {
+			      if(s.length() != 0) {
+			    	  blueChooseButton.setText(getResources().getString(R.string.swap_button_text));
+			      }
+			      else {
+			    	  blueChooseButton.setText(getResources().getString(R.string.add_button_text));
+			      }
+			   }
+		  });
 		
 		red_color_id = "10";
 		green_color_id = "20";
@@ -99,7 +144,7 @@ public class MainTaskActivity extends ListActivity implements LoaderManager.Load
 		getLoaderManager().initLoader(Integer.parseInt(green_color_id), null, this);
 		getLoaderManager().initLoader(Integer.parseInt(blue_color_id), null, this);
 	}
-
+	
 	private void fillData() {
 		String[] mFromColumns = new String[] { TaskTable.COLUMN_ID, TaskTable.COLUMN_DESCRIPTION };
 		int[] mToFields = new int[] { R.id.task_id, R.id.task_description };
@@ -143,11 +188,6 @@ public class MainTaskActivity extends ListActivity implements LoaderManager.Load
 		mSpinnerAdapter = new SimpleCursorAdapter(this, R.layout.row_spinner_task, null,
 				mFromColumnForSpinner, mToFieldsForSpinner, 0);
 		
-		/*
-		redPrimaryTaskSpinner.setAdapter(mSpinnerAdapter);
-		greenPrimaryTaskSpinner.setAdapter(mSpinnerAdapter);
-		bluePrimaryTaskSpinner.setAdapter(mSpinnerAdapter);
-		*/
 	}
 	
 	@Override
@@ -273,112 +313,73 @@ public class MainTaskActivity extends ListActivity implements LoaderManager.Load
 		taskDescriptionEditText.requestFocus();
 	}
 	
-	public void onPrimaryTaskClick (View view) {
-		if (view.getId() == R.id.redPrimaryLayout) {
-			new AlertDialog.Builder(MainTaskActivity.this)
-	   		.setTitle("Complete task")
-	   	    .setMessage("Are you sure you want to mark this task as complete?")
-	   	    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-	   	        public void onClick(DialogInterface dialog, int which) { 
-	   	        	String selectionOfPrimaryTaskId = "(" + TaskTable.COLUMN_PRIMARYCOLOR + " = " + red_color_id + ")";
-		   	 		ContentValues values = new ContentValues();
-		   	 		values.put(TaskTable.COLUMN_PRIMARYCOLOR, 0);
-		   	 		values.put(TaskTable.COLUMN_COMPLETE, 1);
-		   	 		getContentResolver().update(TaskContentProvider.CONTENT_URI, values, selectionOfPrimaryTaskId, null);
-	   	        }
-	   	     })
-	   	    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-	   	        public void onClick(DialogInterface dialog, int which) { 
-	   	        }
-	   	     })
-	   	    .show();
-		}
-		else if (view.getId() == R.id.greenPrimaryLayout) {
-			new AlertDialog.Builder(MainTaskActivity.this)
-	   		.setTitle("Complete task")
-	   	    .setMessage("Are you sure you want to mark this task as complete?")
-	   	    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-	   	        public void onClick(DialogInterface dialog, int which) { 
-	   	        	String selectionOfPrimaryTaskId = "(" + TaskTable.COLUMN_PRIMARYCOLOR + " = " + green_color_id + ")";
-		   	 		ContentValues values = new ContentValues();
-		   	 		values.put(TaskTable.COLUMN_PRIMARYCOLOR, 0);
-		   	 		values.put(TaskTable.COLUMN_COMPLETE, 1);
-		   	 		getContentResolver().update(TaskContentProvider.CONTENT_URI, values, selectionOfPrimaryTaskId, null);
-	   	        }
-	   	     })
-	   	    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-	   	        public void onClick(DialogInterface dialog, int which) { 
-	   	        }
-	   	     })
-	   	    .show();
-		}
-		else if (view.getId() == R.id.bluePrimaryLayout) {
-			new AlertDialog.Builder(MainTaskActivity.this)
-	   		.setTitle("Complete task")
-	   	    .setMessage("Are you sure you want to mark this task as complete?")
-	   	    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-	   	        public void onClick(DialogInterface dialog, int which) { 
-	   	        	String selectionOfPrimaryTaskId = "(" + TaskTable.COLUMN_PRIMARYCOLOR + " = " + blue_color_id + ")";
-		   	 		ContentValues values = new ContentValues();
-		   	 		values.put(TaskTable.COLUMN_PRIMARYCOLOR, 0);
-		   	 		values.put(TaskTable.COLUMN_COMPLETE, 1);
-		   	 		getContentResolver().update(TaskContentProvider.CONTENT_URI, values, selectionOfPrimaryTaskId, null);
-	   	        }
-	   	     })
-	   	    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-	   	        public void onClick(DialogInterface dialog, int which) { 
-	   	        }
-	   	     })
-	   	    .show();
-		}
-	}
-	
-	public void choosePrimaryTask(View view) {
-		AlertDialog.Builder b = new Builder(this);
-	    b.setTitle("Example");
-	    String[] types = {"By Zip", "By Category"};
-	    b.setItems(types, new OnClickListener() {
-
-	        @Override
-	        public void onClick(DialogInterface dialog, int which) {
-
-	            dialog.dismiss();
-	            switch(which){
-	            case 0:
-	                break;
-	            case 1:
-	                break;
-	            }
-	        }
-
-	    });
-
-	    b.show();
-	}
-	/*
-	public void makeTaskPrimary(View view) {
-		TextView primaryTextView = (TextView) findViewById(R.id.red_primary_task_selected_text);
-		TextView primaryIdTextView = (TextView) findViewById(R.id.red_primary_task_selected_id);
-		TextView idTextView = (TextView) redPrimaryTaskSpinner.findViewById(R.id.task_id_spinner);
-		TextView descriptionTextView = (TextView) redPrimaryTaskSpinner.findViewById(R.id.task_description_spinner);
+	public void completePrimaryTask (View view) {
 		String color_id = red_color_id;
-
-		if (view.getId() == R.id.green_primary_task_button) {
-			primaryTextView = (TextView) findViewById(R.id.green_primary_task_selected_text);
-			primaryIdTextView = (TextView) findViewById(R.id.green_primary_task_selected_id);
-			idTextView = (TextView) greenPrimaryTaskSpinner.findViewById(R.id.task_id_spinner);
-			descriptionTextView = (TextView) greenPrimaryTaskSpinner.findViewById(R.id.task_description_spinner);
+		
+		if (view.getId() == R.id.green_complete_button) {
 			color_id = green_color_id;
 		}
-		else if (view.getId() == R.id.blue_primary_task_button) {
-			primaryTextView = (TextView) findViewById(R.id.blue_primary_task_selected_text);
-			primaryIdTextView = (TextView) findViewById(R.id.blue_primary_task_selected_id);
-			idTextView = (TextView) bluePrimaryTaskSpinner.findViewById(R.id.task_id_spinner);
-			descriptionTextView = (TextView) bluePrimaryTaskSpinner.findViewById(R.id.task_description_spinner);
+		else if (view.getId() == R.id.blue_complete_button) {
 			color_id = blue_color_id;
 		}
 		
-		if (idTextView != null) {
+		final String final_color_id = color_id;
+		
+		new AlertDialog.Builder(MainTaskActivity.this)
+   		.setTitle("Complete task")
+   	    .setMessage("Are you sure you want to mark this task as complete?")
+   	    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+   	        public void onClick(DialogInterface dialog, int which) { 
+   	        	String selectionOfPrimaryTaskId = "(" + TaskTable.COLUMN_PRIMARYCOLOR + " = " + final_color_id + ")";
+	   	 		ContentValues values = new ContentValues();
+	   	 		values.put(TaskTable.COLUMN_PRIMARYCOLOR, 0);
+	   	 		values.put(TaskTable.COLUMN_COMPLETE, 1);
+	   	 		getContentResolver().update(TaskContentProvider.CONTENT_URI, values, selectionOfPrimaryTaskId, null);
+   	        }
+   	     })
+   	    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+   	        public void onClick(DialogInterface dialog, int which) { 
+   	        }
+   	     })
+   	    .show();
+	}
+	
+	public void choosePrimaryTask(View view) {
+		final View v = view;
+		
+		AlertDialog.Builder builder = new Builder(this);
+	    builder.setTitle("Set Primary Task");
+	    builder.setAdapter(mAdapter, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int position) {
+            	Cursor cursor = (Cursor)mAdapter.getItem(position);
+            	String idText = cursor.getString(cursor.getColumnIndex(TaskTable.COLUMN_ID));
+            	String descriptionText = cursor.getString(cursor.getColumnIndex(TaskTable.COLUMN_DESCRIPTION));
+            	setPrimaryTask(v, idText, descriptionText);
+            }
+        });
+
+	    builder.show();
+	    
+	}
+	
+	private void setPrimaryTask(View view, String idText, String descriptionText) {
+		TextView primaryTextView = (TextView) findViewById(R.id.red_primary_task_selected_text);
+		TextView primaryIdTextView = (TextView) findViewById(R.id.red_primary_task_selected_id);
+		String color_id = red_color_id;
+
+		if (view.getId() == R.id.green_choose_button) {
+			primaryTextView = (TextView) findViewById(R.id.green_primary_task_selected_text);
+			primaryIdTextView = (TextView) findViewById(R.id.green_primary_task_selected_id);
+
+			color_id = green_color_id;
+		}
+		else if (view.getId() == R.id.blue_choose_button) {
+			primaryTextView = (TextView) findViewById(R.id.blue_primary_task_selected_text);
+			primaryIdTextView = (TextView) findViewById(R.id.blue_primary_task_selected_id);
+			color_id = blue_color_id;
+		}
+		
+		if (idText != null) {
 			if (!primaryIdTextView.getText().equals("")) {
 				String selectionOfPrimaryTaskId = "(" + TaskTable.COLUMN_ID + " = " + primaryIdTextView.getText() + ")";
 				ContentValues values = new ContentValues();
@@ -386,17 +387,17 @@ public class MainTaskActivity extends ListActivity implements LoaderManager.Load
 				getContentResolver().update(TaskContentProvider.CONTENT_URI, values, selectionOfPrimaryTaskId, null);
 			}
 			
-			String selectionOfTasksWithSameId = "(" + TaskTable.COLUMN_ID + " = " + idTextView.getText() + ")";
+			String selectionOfTasksWithSameId = "(" + TaskTable.COLUMN_ID + " = " + idText + ")";
 			
 			ContentValues values = new ContentValues();
 			values.put(TaskTable.COLUMN_PRIMARYCOLOR, color_id);
 			
 			getContentResolver().update(TaskContentProvider.CONTENT_URI, values, selectionOfTasksWithSameId, null);
 			
-			primaryIdTextView.setText(idTextView.getText().toString());
-			primaryTextView.setText(descriptionTextView.getText().toString());
+			primaryIdTextView.setText(idText);
+			primaryTextView.setText(descriptionText);
 		}
-	} */
+	}
 	
 	public void clearPrimaryTask(View view) {
 		TextView primaryTextView = (TextView) findViewById(R.id.red_primary_task_selected_text);
