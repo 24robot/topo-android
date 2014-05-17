@@ -1,4 +1,4 @@
-<ScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -6,19 +6,14 @@
     android:paddingLeft="8dp"
     android:paddingRight="8dp"
     android:background="#E5E5E5"
-    >
-     
-    <LinearLayout
     android:id="@+id/LinearLayout1"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:orientation="vertical"    
     >
     
     <LinearLayout 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/layout_bg"
         android:gravity="center_vertical"
         android:orientation="horizontal">
@@ -29,36 +24,34 @@
             android:layout_weight="1"
 	        android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="2dp"
             android:singleLine="true"
             android:background="@null"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:fontFamily="sans-serif-light" 
 	        android:hint="@string/task_description_placeholder"/>
-      
-        <ImageView
-            android:id="@+id/add_task_button"
-            android:onClick="onAddTaskClick"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:contentDescription="@string/add_task_button"
-            android:src="@drawable/ic_custom_add_grey" />
+
+	    <Button
+	        android:id="@+id/add_task_button"
+	        android:layout_width="20dp"
+	        android:layout_height="20dp"
+	        android:layout_marginRight="2dp"
+            android:layout_marginBottom="2dp"
+	        android:background="?android:attr/selectableItemBackground"
+	        android:fontFamily="sans-serif-light"
+	        android:onClick="onAddTaskClick"
+	        android:text="+"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     </LinearLayout>
-    
+ 
     <TextView
          android:id="@+id/primaryTasksTitle"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:text="@string/primary_tasks"
-         android:layout_marginTop="16dp"
-         android:textSize="24sp"
-         android:fontFamily="sans-serif" 
-         android:textStyle="italic"/>
-    
-    <TextView
-         android:id="@+id/primaryTasksTitleDescription"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:text="@string/primary_tasks_description"
-         android:layout_marginTop="4dp"
+         android:layout_marginTop="8dp"
          android:textSize="16sp"
          android:fontFamily="sans-serif-light" 
          android:textStyle="normal"/>
@@ -76,18 +69,18 @@
                android:background="@drawable/layout_bg"
                android:onClick="onPrimaryTaskClick"
                android:orientation="vertical"
-               android:layout_marginTop="8dp">
+               android:layout_marginTop="4dp">
                
                 <LinearLayout
                    android:layout_width="match_parent"
-                   android:layout_height="48dp"
+                   android:layout_height="32dp"
                    android:orientation="horizontal"
                    android:gravity="center_vertical">
                    
-                   <ImageView 
-                       android:layout_width="16dp"
+                   <View 
+                       android:layout_width="2dp"
                        android:layout_height="16dp"
-                       android:layout_marginLeft="8dp"
+                       android:layout_marginLeft="4dp"
                        android:background="@color/android_light_red"
                        android:contentDescription="@string/description" />         
                        
@@ -95,7 +88,7 @@
                        android:id="@+id/red_primary_task_selected_id"
                        android:layout_width="0dp"
                        android:layout_height="0dp"
-                       android:textAppearance="?android:attr/textAppearanceMedium" />
+                       />
                     
                      <TextView
                          android:id="@+id/red_primary_task_selected_text"
@@ -103,13 +96,13 @@
                          android:layout_height="wrap_content"
                          android:layout_weight="1"
                          android:hint="@string/empty"
-                         android:layout_marginLeft="8dp"
-                         android:textAppearance="?android:attr/textAppearanceMedium" />
+                         android:layout_marginLeft="4dp" 
+                         android:textAppearance="?android:attr/textAppearanceSmall" />
                      
                </LinearLayout>
                <LinearLayout
                    android:layout_width="match_parent"
-                   android:layout_height="48dp"
+                   android:layout_height="24dp"
                    android:orientation="horizontal"
                    android:gravity="center_vertical">
                    
@@ -120,6 +113,8 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:fontFamily="sans-serif-light" 
                         android:background="?android:attr/selectableItemBackground"  />
                    
                    <View
@@ -136,6 +131,8 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:fontFamily="sans-serif-light" 
                         android:background="?android:attr/selectableItemBackground"  />
                    
                     <View
@@ -152,6 +149,8 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:fontFamily="sans-serif-light" 
                         android:background="?android:attr/selectableItemBackground"  />
               </LinearLayout>
       		</LinearLayout>
@@ -198,14 +197,14 @@
                
                 <LinearLayout
                    android:layout_width="match_parent"
-                   android:layout_height="48dp"
+                   android:layout_height="32dp"
                    android:orientation="horizontal"
                    android:gravity="center_vertical">
                    
-                   <ImageView 
-                       android:layout_width="16dp"
+                   <View 
+                       android:layout_width="2dp"
                        android:layout_height="16dp"
-                       android:layout_marginLeft="8dp"
+                       android:layout_marginLeft="4dp"
                        android:background="@color/android_light_green"
                        android:contentDescription="@string/description" />         
                        
@@ -213,7 +212,7 @@
                        android:id="@+id/green_primary_task_selected_id"
                        android:layout_width="0dp"
                        android:layout_height="0dp"
-                       android:textAppearance="?android:attr/textAppearanceMedium" />
+                       />
                     
                      <TextView
                          android:id="@+id/green_primary_task_selected_text"
@@ -221,13 +220,13 @@
                          android:layout_height="wrap_content"
                          android:layout_weight="1"
                          android:hint="@string/empty"
-                         android:layout_marginLeft="8dp"
-                         android:textAppearance="?android:attr/textAppearanceMedium" />
+                         android:layout_marginLeft="4dp"
+                         android:textAppearance="?android:attr/textAppearanceSmall" />
                      
                </LinearLayout>
                <LinearLayout
                    android:layout_width="match_parent"
-                   android:layout_height="48dp"
+                   android:layout_height="24dp"
                    android:orientation="horizontal"
                    android:gravity="center_vertical">
                    
@@ -238,6 +237,8 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:fontFamily="sans-serif-light" 
                         android:background="?android:attr/selectableItemBackground"  />
                    
                    <View
@@ -254,6 +255,8 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:fontFamily="sans-serif-light" 
                         android:background="?android:attr/selectableItemBackground"  />
                    
                     <View
@@ -270,10 +273,12 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:fontFamily="sans-serif-light" 
                         android:background="?android:attr/selectableItemBackground"  />
               </LinearLayout>
-            </LinearLayout>
-
+      		</LinearLayout>
+            
             <LinearLayout
                android:id="@+id/bluePrimaryLayout"
                android:layout_width="match_parent"
@@ -285,14 +290,14 @@
                
                 <LinearLayout
                    android:layout_width="match_parent"
-                   android:layout_height="48dp"
+                   android:layout_height="32dp"
                    android:orientation="horizontal"
                    android:gravity="center_vertical">
                    
-                   <ImageView 
-                       android:layout_width="16dp"
+                   <View 
+                       android:layout_width="2dp"
                        android:layout_height="16dp"
-                       android:layout_marginLeft="8dp"
+                       android:layout_marginLeft="4dp"
                        android:background="@color/android_light_blue"
                        android:contentDescription="@string/description" />         
                        
@@ -300,7 +305,7 @@
                        android:id="@+id/blue_primary_task_selected_id"
                        android:layout_width="0dp"
                        android:layout_height="0dp"
-                       android:textAppearance="?android:attr/textAppearanceMedium" />
+                       android:textAppearance="?android:attr/textAppearanceSmall" />
                     
                      <TextView
                          android:id="@+id/blue_primary_task_selected_text"
@@ -308,13 +313,13 @@
                          android:layout_height="wrap_content"
                          android:layout_weight="1"
                          android:hint="@string/empty"
-                         android:layout_marginLeft="8dp"
-                         android:textAppearance="?android:attr/textAppearanceMedium" />
+                         android:layout_marginLeft="4dp"
+                         android:textAppearance="?android:attr/textAppearanceSmall" />
                      
                </LinearLayout>
                <LinearLayout
                    android:layout_width="match_parent"
-                   android:layout_height="48dp"
+                   android:layout_height="24dp"
                    android:orientation="horizontal"
                    android:gravity="center_vertical">
                    
@@ -325,6 +330,8 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:fontFamily="sans-serif-light" 
                         android:background="?android:attr/selectableItemBackground"  />
                    
                    <View
@@ -341,6 +348,8 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:fontFamily="sans-serif-light" 
                         android:background="?android:attr/selectableItemBackground"  />
                    
                     <View
@@ -357,35 +366,28 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:fontFamily="sans-serif-light" 
                         android:background="?android:attr/selectableItemBackground"  />
               </LinearLayout>
             </LinearLayout>
     </LinearLayout>
+
     
     <TextView
          android:id="@+id/incompleteTasksTitle"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:text="@string/secondary_tasks"
-         android:layout_marginTop="16dp"
-         android:textSize="24sp"
-         android:fontFamily="sans-serif" 
-         android:textStyle="italic"/>
-    
-    <TextView
-         android:id="@+id/secondaryTasksTitleDescription"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:text="@string/secondary_tasks_description"
-         android:layout_marginTop="4dp"
          android:textSize="16sp"
+         android:layout_marginTop="8dp"
          android:fontFamily="sans-serif-light" 
          android:textStyle="normal"/>
     
 	<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:layout_marginBottom="8dp"
         android:id="@+id/secondaryTaskList"
         android:orientation="vertical"
@@ -396,11 +398,9 @@
 	        android:id="@android:id/list"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
-	        tools:listitem="@layout/row_list_task" 
-	        android:layout_marginLeft="8dp"/>
+	        tools:listitem="@layout/row_list_task"
+	        android:layout_marginLeft="4dp"/>
 	
     </LinearLayout>
 
 </LinearLayout>
-
-</ScrollView>
